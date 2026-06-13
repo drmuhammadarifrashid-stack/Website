@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import type { Metadata } from 'next';
 import { DoctorProfileCard } from '@/components/blocks/DoctorProfileCard';
 import { Card } from '@/components/ui/card';
@@ -91,7 +90,7 @@ export default function AboutPage() {
               <Badge style={{ background: 'rgba(255,255,255,0.1)', color: 'var(--color-teal-light)', marginBottom: '1rem' }}>Professional Philosophy</Badge>
               <h2 className="section-title" style={{ color: 'white', textAlign: 'left' }}>Patient-Centered Care</h2>
               <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '1.05rem', lineHeight: 1.8, marginBottom: '1.5rem' }}>
-                "Effective pain care goes beyond prescribing medications — it requires understanding each patient's unique condition, lifestyle, and goals. My mission is to design personalized treatment pathways that address the root cause of pain, rather than merely masking the symptoms."
+                &quot;Effective pain care goes beyond prescribing medications — it requires understanding each patient&apos;s unique condition, lifestyle, and goals. My mission is to design personalized treatment pathways that address the root cause of pain, rather than merely masking the symptoms.&quot;
               </p>
               <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '1.05rem', lineHeight: 1.8 }}>
                 Dr. Arif strongly believes in a compassionate approach, ensuring that every patient feels heard and supported throughout their journey to recovery. His focus is on improving functional capacity and restoring a high quality of life.

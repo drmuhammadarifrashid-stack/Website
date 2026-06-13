@@ -14,7 +14,7 @@ export function TestimonialCard({ quote, name, condition, rating = 5 }: Testimon
         {'★'.repeat(rating)}
       </div>
       <p style={{ color: 'var(--color-gray-700)', fontStyle: 'italic', lineHeight: 1.7, marginBottom: '1.5rem' }}>
-        "{quote}"
+        &quot;{quote}&quot;
       </p>
       <div>
         <div style={{ fontWeight: 700, color: 'var(--color-navy)', fontFamily: 'Outfit, sans-serif' }}>{name}</div>

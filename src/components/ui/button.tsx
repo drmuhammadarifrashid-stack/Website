@@ -56,7 +56,7 @@ function Button({
       <Link 
         href={href} 
         className={cn(buttonVariants({ variant, size, className }))} 
-        {...(props as any)}
+        {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
       />
     )
   }

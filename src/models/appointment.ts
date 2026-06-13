@@ -211,6 +211,7 @@ AppointmentSchema.index({ name: 'text', reason: 'text' });
 // Pre-save middleware
 // ============================================================
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 AppointmentSchema.pre('save', function (next: any) {
   // Normalize phone: strip spaces, dashes, parentheses
   this.phone = this.phone.replace(/[\s\-()]/g, '');
