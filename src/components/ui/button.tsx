@@ -9,18 +9,18 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+        default: "bg-[#0a2342] text-white shadow hover:bg-[#1a3a5c]",
         outline:
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "bg-white/10 text-white border border-white/40 shadow-sm hover:bg-white hover:text-[#0a2342] backdrop-blur-sm transition-all",
         ghost:
           "hover:bg-accent hover:text-accent-foreground",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         link: "text-primary underline-offset-4 hover:underline",
-        primary: "bg-gradient-to-r from-[var(--color-teal)] to-[var(--color-teal-light)] text-white shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300",
-        teal: "bg-var(--color-teal) text-white shadow-md hover:shadow-lg hover:-translate-y-0.5 hover:bg-var(--color-teal-dark) transition-all duration-300",
+        primary: "bg-gradient-to-r from-[#1a7a8a] to-[#22a0b4] text-white shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300",
+        teal: "bg-[#1a7a8a] text-white shadow-md hover:shadow-lg hover:-translate-y-0.5 hover:bg-[#15606e] transition-all duration-300",
         whatsapp: "bg-[#25D366] text-white shadow-md hover:shadow-lg hover:-translate-y-0.5 hover:bg-[#128C7E] transition-all duration-300",
       },
       size: {

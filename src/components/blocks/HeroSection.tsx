@@ -54,8 +54,8 @@ export function HeroSection({
               <Button href={primaryButtonHref} variant="teal" size="lg">
                 📅 {primaryButtonText}
               </Button>
-              <Button href={secondaryButtonHref} variant="secondary" size="lg" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.4)' }}>
-                {secondaryButtonText}
+              <Button href={secondaryButtonHref} variant="secondary" size="lg">
+                Meet the Doctor
               </Button>
             </div>
 

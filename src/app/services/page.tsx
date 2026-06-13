@@ -165,7 +165,7 @@ export default function ServicesPage() {
                 </Card>
 
                 <div style={{ marginTop: '2rem' }}>
-                  <Button href="/appointment" variant="primary" style={{ background: svc.color }}>
+                  <Button href="/appointment" variant="primary">
                     Book an Appointment
                   </Button>
                 </div>

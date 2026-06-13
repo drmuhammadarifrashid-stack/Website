@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { Button } from "@/components/ui/button";
 import { Badge } from '../ui/badge';
 
 type DoctorProfileCardProps = {
@@ -74,9 +75,9 @@ export function DoctorProfileCard({
 
         {linkHref && (
           <div style={{ marginTop: '2rem' }}>
-            <Link href={linkHref} className="btn btn-primary">
-              {linkText}
-            </Link>
+            <Button href={linkHref} variant="primary" size="lg" className="w-full" style={{ width: '100%' }}>
+              Book an Appointment
+            </Button>
           </div>
         )}
       </div>

@@ -123,7 +123,7 @@ export default function LocationsPage() {
                   </div>
 
                   <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                    <Button href="/appointment" variant="primary" style={{ background: loc.color }}>
+                    <Button href="/appointment" variant="primary">
                       📅 Book Appointment
                     </Button>
                     <Button href={`https://wa.me/${whatsappNumber}`} variant="whatsapp">
