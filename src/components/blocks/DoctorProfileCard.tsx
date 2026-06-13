@@ -32,7 +32,7 @@ export function DoctorProfileCard({
       {/* Image Side */}
       <div style={{ position: 'relative' }}>
         <div style={{ borderRadius: 20, overflow: 'hidden', height: compact ? 400 : 480, position: 'relative', boxShadow: 'var(--shadow-xl)' }}>
-          <Image src={imageUrl} alt={imageAlt} fill style={{ objectFit: 'cover' }} />
+          <Image src={imageUrl} alt={imageAlt} fill style={{ objectFit: 'cover', objectPosition: 'top' }} />
         </div>
         {!compact && qualifications.length > 0 && (
           <div style={{

@@ -9,32 +9,30 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/80",
+        default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
         outline:
-          "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
+          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost:
-          "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
+          "hover:bg-accent hover:text-accent-foreground",
         destructive:
-          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         link: "text-primary underline-offset-4 hover:underline",
-        primary: "bg-teal-600 text-white hover:bg-teal-700",
-        teal: "bg-teal-600 text-white hover:bg-teal-700",
-        whatsapp: "bg-[#25D366] text-white hover:bg-[#128C7E]",
+        primary: "bg-gradient-to-r from-[var(--color-teal)] to-[var(--color-teal-light)] text-white shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300",
+        teal: "bg-var(--color-teal) text-white shadow-md hover:shadow-lg hover:-translate-y-0.5 hover:bg-var(--color-teal-dark) transition-all duration-300",
+        whatsapp: "bg-[#25D366] text-white shadow-md hover:shadow-lg hover:-translate-y-0.5 hover:bg-[#128C7E] transition-all duration-300",
       },
       size: {
         default:
-          "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
-        lg: "h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        icon: "size-8",
-        "icon-xs":
-          "size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
-        "icon-sm":
-          "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
-        "icon-lg": "size-9",
+          "h-11 px-6 py-2 text-[0.95rem] gap-2 rounded-lg",
+        xs: "h-7 gap-1 rounded-md px-2 text-xs",
+        sm: "h-9 gap-1.5 rounded-md px-4 text-sm",
+        lg: "h-14 px-8 text-lg font-semibold gap-2.5 rounded-xl",
+        icon: "h-11 w-11",
+        "icon-xs": "h-7 w-7 rounded-md",
+        "icon-sm": "h-9 w-9 rounded-md",
+        "icon-lg": "h-14 w-14 rounded-xl",
       },
     },
     defaultVariants: {
