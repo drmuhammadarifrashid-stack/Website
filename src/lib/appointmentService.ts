@@ -9,6 +9,7 @@ import type {
   AppointmentStatus,
   AppointmentLocation,
   Gender,
+  IAppointmentDocument,
 } from '@/types/appointment';
 import Appointment, { IAppointment } from '@/models/appointment';
 import dbConnect from '@/lib/db';
@@ -186,7 +187,7 @@ export async function getAppointments(
   const totalPages = Math.ceil(total / limit);
 
   return {
-    appointments: appointments.map((a) => a.toObject()),
+    appointments: appointments.map((a) => a.toObject() as unknown as IAppointmentDocument),
     total,
     page,
     limit,

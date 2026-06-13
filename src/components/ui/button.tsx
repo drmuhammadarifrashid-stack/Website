@@ -1,4 +1,5 @@
 import { Button as ButtonPrimitive } from "@base-ui/react/button"
+import Link from "next/link"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
@@ -18,6 +19,9 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
+        primary: "bg-teal-600 text-white hover:bg-teal-700",
+        teal: "bg-teal-600 text-white hover:bg-teal-700",
+        whatsapp: "bg-[#25D366] text-white hover:bg-[#128C7E]",
       },
       size: {
         default:
@@ -44,8 +48,19 @@ function Button({
   className,
   variant = "default",
   size = "default",
+  href,
   ...props
-}: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
+}: ButtonPrimitive.Props & VariantProps<typeof buttonVariants> & { href?: string }) {
+  if (href) {
+    return (
+      <Link 
+        href={href} 
+        className={cn(buttonVariants({ variant, size, className }))} 
+        {...(props as any)}
+      />
+    )
+  }
+
   return (
     <ButtonPrimitive
       data-slot="button"
