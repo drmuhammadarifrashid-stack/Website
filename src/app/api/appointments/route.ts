@@ -101,6 +101,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Handle business logic errors from service
+    if (error instanceof Error && (error.message.includes('fully booked') || error.message.includes('already booked'))) {
+      return NextResponse.json(
+        { success: false, error: error.message },
+        { status: 409 }
+      );
+    }
+
     return NextResponse.json(
       { success: false, error: 'Failed to create appointment. Please try again.' },
       { status: 500 }

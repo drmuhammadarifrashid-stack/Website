@@ -121,6 +121,24 @@ export async function createAppointment(
   data: CreateAppointmentInput
 ): Promise<IAppointment> {
   await dbConnect();
+
+  // Enforce limit of 10 appointments per day per location
+  const count = await Appointment.countDocuments({
+    location: data.location,
+    appointmentDate: data.appointmentDate,
+    status: { $in: ['pending', 'confirmed'] },
+  }).exec();
+
+  if (count >= 10) {
+    throw new Error('This location is fully booked for the selected date. Please choose another date or location.');
+  }
+
+  // Also enforce strict time slot uniqueness (1 appointment per time slot per location)
+  const conflict = await checkSchedulingConflict(data.location, data.appointmentDate, data.appointmentTime);
+  if (conflict) {
+    throw new Error('This specific time slot is already booked. Please choose another time.');
+  }
+
   const appointment = new Appointment(data);
   return appointment.save();
 }
