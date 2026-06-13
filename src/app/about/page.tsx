@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { DoctorProfileCard } from '@/components/blocks/DoctorProfileCard';
-import { Card } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 export const metadata: Metadata = {
   title: 'About Dr. Muhammad Arif Rashid | Consultant Anesthesiologist',

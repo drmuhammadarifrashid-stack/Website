@@ -10,7 +10,7 @@ import type {
   AppointmentLocation,
   Gender,
 } from '@/types/appointment';
-import Appointment, { IAppointment } from '@/models/Appointment';
+import Appointment, { IAppointment } from '@/models/appointment';
 import dbConnect from '@/lib/db';
 
 // ============================================================

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Badge } from '../ui/Badge';
+import { Badge } from '../ui/badge';
 
 type DoctorProfileCardProps = {
   imageUrl: string;

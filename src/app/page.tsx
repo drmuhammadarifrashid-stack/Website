@@ -5,9 +5,9 @@ import { HeroSection } from '@/components/blocks/HeroSection';
 import { ServiceCard } from '@/components/blocks/ServiceCard';
 import { LocationCard } from '@/components/blocks/LocationCard';
 import { TestimonialCard } from '@/components/blocks/TestimonialCard';
-import { Badge } from '@/components/ui/Badge';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
   title: 'Dr. Muhammad Arif Rashid | Expert Pain Specialist Pakistan',

@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import { Button } from '../ui/Button';
-import { Badge } from '../ui/Badge';
+import { Button } from '../ui/button';
+import { Badge } from '../ui/badge';
 
 type HeroSectionProps = {
   badgeText: string;
