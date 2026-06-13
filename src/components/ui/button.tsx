@@ -25,14 +25,14 @@ const buttonVariants = cva(
       },
       size: {
         default:
-          "h-11 px-6 py-2 text-[0.95rem] gap-2 rounded-lg",
+          "h-10 px-5 py-2 text-sm gap-2 rounded-lg",
         xs: "h-7 gap-1 rounded-md px-2 text-xs",
-        sm: "h-9 gap-1.5 rounded-md px-4 text-sm",
-        lg: "h-14 px-8 text-lg font-semibold gap-2.5 rounded-xl",
-        icon: "h-11 w-11",
+        sm: "h-9 gap-1.5 rounded-md px-4 text-xs",
+        lg: "h-12 px-6 text-[0.95rem] font-semibold gap-2 rounded-xl",
+        icon: "h-10 w-10",
         "icon-xs": "h-7 w-7 rounded-md",
         "icon-sm": "h-9 w-9 rounded-md",
-        "icon-lg": "h-14 w-14 rounded-xl",
+        "icon-lg": "h-12 w-12 rounded-xl",
       },
     },
     defaultVariants: {
