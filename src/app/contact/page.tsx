@@ -38,8 +38,8 @@ export default function ContactPage() {
 
               {[
                 { icon: '📍', label: 'Main Clinic', value: '123 Main Boulevard, Gulberg III, Lahore, Pakistan' },
-                { icon: '📞', label: 'Phone', value: '+92 300 123 4567' },
-                { icon: '📧', label: 'Email', value: 'info@painspecialist.pk' },
+                { icon: '📞', label: 'Phone', value: '+92 304 455 0048' },
+                { icon: '📧', label: 'Email', value: 'drmuhammadarifrashid@gmail.com' },
                 { icon: '⏰', label: 'Working Hours', value: 'Mon, Wed, Fri: 9AM–1PM\nTue, Thu: 5PM–8PM\nSat: 10AM–2PM' },
               ].map((item) => (
                 <div key={item.label} className="card" style={{ padding: '1.25rem 1.5rem', marginBottom: '1rem', display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>

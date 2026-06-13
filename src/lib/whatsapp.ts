@@ -1,5 +1,5 @@
 export function getWhatsAppNumber(): string {
-  return process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '923001234567';
+  return process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '923044550048';
 }
 
 export function generateWhatsAppLink(message: string, phoneNumber?: string): string {

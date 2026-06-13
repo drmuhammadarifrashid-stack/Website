@@ -12,8 +12,8 @@ const locations = [
     name: 'Fauji Foundation Hospital',
     type: 'Hospital Consultation',
     address: 'Bedian Rd, near Askari 3, Cantt, Lahore, Pakistan',
-    phone: '+92 300 123 4567',
-    email: 'info@drarifpain.pk',
+    phone: '+92 304 455 0048',
+    email: 'drmuhammadarifrashid@gmail.com',
     schedule: [
       { day: 'Monday', hours: '4:00 PM – 8:00 PM' },
       { day: 'Wednesday', hours: '4:00 PM – 8:00 PM' },
@@ -31,8 +31,8 @@ const locations = [
     name: 'Muhammad Ali Khan Orthopedic & Surgical Hospital',
     type: 'Private Clinic',
     address: 'Ferozpur Rd, Qainchi Amar Sidhu, Lahore, Pakistan',
-    phone: '+92 300 123 4567',
-    email: 'info@drarifpain.pk',
+    phone: '+92 304 455 0048',
+    email: 'drmuhammadarifrashid@gmail.com',
     schedule: [
       { day: 'Tuesday', hours: '5:00 PM – 9:00 PM' },
       { day: 'Thursday', hours: '5:00 PM – 9:00 PM' },
