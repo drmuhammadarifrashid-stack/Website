@@ -6,46 +6,36 @@ export const dynamic = 'force-dynamic';
 
 export default function AdminDashboardPage() {
   return (
-    <div className="space-y-6">
-      {/* Page Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight">Dashboard</h1>
-          <p className="text-sm text-slate-400 mt-0.5">Manage appointments and track clinic activity</p>
-        </div>
-      </div>
-
-      {/* Stat Cards */}
-      <Suspense
-        fallback={
-          <div className="grid gap-4 grid-cols-2 lg:grid-cols-5 mb-6">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="h-28 rounded-2xl bg-slate-100 animate-pulse" />
+    <div className="space-y-8">
+      {/* ── Stat Cards Section ───────────────────────────────────── */}
+      <section>
+        <Suspense fallback={
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="h-32 bg-[#0f172a] rounded-2xl animate-pulse border border-slate-800/60" />
             ))}
           </div>
-        }
-      >
-        <StatCards />
-      </Suspense>
+        }>
+          <StatCards />
+        </Suspense>
+      </section>
 
-      {/* Appointments */}
-      <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
-        <div className="px-6 py-5 border-b border-slate-50 flex items-center justify-between">
+      {/* ── Appointments Table Section ───────────────────────────── */}
+      <section className="bg-[#0f172a] rounded-2xl shadow-xl shadow-black/20 border border-slate-800/60 overflow-hidden">
+        <div className="p-6 border-b border-slate-800/60 bg-[#0f172a] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h2 className="text-base font-bold text-slate-800">Appointments List</h2>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Click <span className="font-semibold text-teal-600">⋯</span> on any row to change status, reschedule, or send WhatsApp
-            </p>
+            <h2 className="text-xl font-bold text-white font-sans tracking-tight">Appointments List</h2>
+            <p className="text-sm text-slate-400 mt-1">Manage and update patient appointments.</p>
           </div>
-          <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-            <span className="text-xs text-slate-400 font-medium">Live</span>
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-xs font-semibold">
+            <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span>
+            Live Updates
           </div>
         </div>
-        <div className="p-6">
+        <div className="p-4 sm:p-6 bg-[#020817]">
           <AppointmentsTable />
         </div>
-      </div>
+      </section>
     </div>
   );
 }

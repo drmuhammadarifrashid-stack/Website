@@ -31,7 +31,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   if (status === 'loading') {
     return (
-      <div className="min-h-screen bg-slate-950 flex flex-col justify-center items-center gap-4">
+      <div className="min-h-screen bg-[#020817] flex flex-col justify-center items-center gap-4">
         <div className="relative w-14 h-14">
           <div className="absolute inset-0 rounded-full border-4 border-teal-900"></div>
           <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-teal-400 animate-spin"></div>
@@ -39,7 +39,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Stethoscope className="h-5 w-5 text-teal-400" />
           </div>
         </div>
-        <p className="text-slate-400 text-sm font-medium tracking-widest uppercase">Verifying Access…</p>
+        <p className="text-slate-400 text-sm font-medium tracking-widest uppercase">Verifying Access...</p>
       </div>
     );
   }
@@ -71,7 +71,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* Nav Label */}
       <div className="px-6 pt-6 pb-2">
-        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-600">Navigation</span>
+        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Navigation</span>
       </div>
 
       {/* Nav Links */}
@@ -86,8 +86,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               onClick={() => setIsMobileOpen(false)}
               className={`group flex items-center gap-3 px-3 py-3 rounded-xl text-sm transition-all duration-200 ${
                 isActive
-                  ? 'bg-teal-600/20 text-teal-300 border border-teal-600/30 shadow-sm shadow-teal-900/20'
-                  : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200 border border-transparent'
+                  ? 'bg-teal-500/10 text-teal-300 border border-teal-500/20 shadow-sm shadow-teal-900/10'
+                  : 'text-slate-400 hover:bg-slate-800/40 hover:text-slate-200 border border-transparent'
               }`}
             >
               <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
@@ -101,7 +101,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <div className={`font-semibold text-sm leading-tight ${isActive ? 'text-teal-300' : ''}`}>
                   {item.name}
                 </div>
-                <div className="text-[10px] text-slate-600 leading-tight mt-0.5">{item.description}</div>
+                <div className="text-[10px] text-slate-500 leading-tight mt-0.5">{item.description}</div>
               </div>
               {isActive && <ChevronRight className="h-3.5 w-3.5 text-teal-500 flex-shrink-0" />}
             </Link>
@@ -110,19 +110,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </nav>
 
       {/* Footer */}
-      <div className="p-4 border-t border-slate-800/60 bg-slate-950/40">
+      <div className="p-4 border-t border-slate-800/60 bg-slate-900/50">
         <div className="flex items-center gap-3 px-2 mb-3">
           <div className="w-9 h-9 rounded-full bg-gradient-to-br from-slate-700 to-slate-800 border border-slate-700 flex items-center justify-center text-lg flex-shrink-0">
             👨‍⚕️
           </div>
           <div className="min-w-0">
             <p className="text-xs font-bold text-white truncate">{session.user.name || 'Dr. Arif'}</p>
-            <p className="text-[10px] text-slate-500 truncate">{session.user.email}</p>
+            <p className="text-[10px] text-slate-400 truncate">{session.user.email}</p>
           </div>
         </div>
         <button
           onClick={() => signOut({ callbackUrl: '/' })}
-          className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-800/60 hover:bg-rose-950/60 text-slate-400 hover:text-rose-400 border border-slate-700/60 hover:border-rose-900/40 transition-all duration-200 cursor-pointer group"
+          className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-800/40 hover:bg-rose-950/40 text-slate-400 hover:text-rose-400 border border-slate-700/40 hover:border-rose-900/40 transition-all duration-200 cursor-pointer group"
         >
           <LogOut className="h-3.5 w-3.5 group-hover:rotate-12 transition-transform duration-200" />
           Sign Out
@@ -132,14 +132,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 flex" style={{ fontFamily: 'Inter, sans-serif' }}>
+    <div className="min-h-screen bg-[#020817] flex" style={{ fontFamily: 'Inter, sans-serif' }}>
       {/* ── Desktop Sidebar ─────────────────────────────────── */}
-      <aside className="hidden md:flex w-64 flex-shrink-0 flex-col bg-slate-900 border-r border-slate-800/60 sticky top-0 h-screen overflow-y-auto">
+      <aside className="hidden md:flex w-64 flex-shrink-0 flex-col bg-[#0f172a] border-r border-slate-800/60 sticky top-0 h-screen overflow-y-auto">
         <SidebarContent />
       </aside>
 
       {/* ── Mobile Header ───────────────────────────────────── */}
-      <div className="md:hidden fixed top-0 left-0 right-0 z-50 bg-slate-900 border-b border-slate-800 h-14 flex items-center justify-between px-4">
+      <div className="md:hidden fixed top-0 left-0 right-0 z-50 bg-[#0f172a] border-b border-slate-800 h-14 flex items-center justify-between px-4">
         <div className="flex items-center gap-2.5">
           <div className="w-7 h-7 rounded-lg bg-teal-600 flex items-center justify-center">
             <Stethoscope className="h-4 w-4 text-white" />
@@ -157,11 +157,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* ── Mobile Sidebar Drawer ────────────────────────────── */}
       {isMobileOpen && (
         <div
-          className="md:hidden fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
+          className="md:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
           onClick={() => setIsMobileOpen(false)}
         />
       )}
-      <aside className={`md:hidden fixed top-14 left-0 bottom-0 z-50 w-72 bg-slate-900 border-r border-slate-800 overflow-y-auto transform transition-transform duration-300 ease-in-out ${
+      <aside className={`md:hidden fixed top-14 left-0 bottom-0 z-50 w-72 bg-[#0f172a] border-r border-slate-800 overflow-y-auto transform transition-transform duration-300 ease-in-out ${
         isMobileOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
         <SidebarContent />
@@ -170,29 +170,29 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* ── Main Content ────────────────────────────────────── */}
       <main className="flex-1 flex flex-col min-h-screen overflow-x-hidden">
         {/* Top bar */}
-        <div className="hidden md:flex items-center justify-between px-8 py-4 bg-white border-b border-slate-100 sticky top-0 z-30 shadow-sm">
+        <div className="hidden md:flex items-center justify-between px-8 py-4 bg-[#0f172a]/80 backdrop-blur-md border-b border-slate-800/60 sticky top-0 z-30">
           <div>
-            <h1 className="text-slate-800 font-bold text-lg leading-tight">
+            <h1 className="text-white font-bold text-xl leading-tight">
               {navItems.find(n => n.href === pathname)?.name || 'Admin Panel'}
             </h1>
-            <p className="text-slate-400 text-xs">
+            <p className="text-slate-400 text-xs mt-0.5">
               {navItems.find(n => n.href === pathname)?.description || 'Manage your clinic'}
             </p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <div className="text-right">
-              <p className="text-xs font-semibold text-slate-700">{session.user.name || 'Dr. Arif'}</p>
-              <p className="text-[10px] text-slate-400">{new Date().toLocaleDateString('en-PK', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' })}</p>
+              <p className="text-sm font-bold text-white">{session.user.name || 'Dr. Arif'}</p>
+              <p className="text-[10px] text-teal-400 font-semibold uppercase tracking-wider">{new Date().toLocaleDateString('en-PK', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' })}</p>
             </div>
-            <div className="w-8 h-8 rounded-full bg-teal-100 border-2 border-teal-200 flex items-center justify-center text-sm">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500/20 to-teal-500/5 border border-teal-500/30 flex items-center justify-center text-lg shadow-lg shadow-teal-900/20">
               👨‍⚕️
             </div>
           </div>
         </div>
 
         {/* Page content */}
-        <div className="flex-1 p-4 pt-18 md:pt-0 md:p-8">
-          <div className="max-w-7xl mx-auto">
+        <div className="flex-1 p-4 pt-20 md:pt-0 md:p-8">
+          <div className="max-w-7xl mx-auto text-slate-200">
             {children}
           </div>
         </div>

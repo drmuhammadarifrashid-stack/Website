@@ -3,87 +3,93 @@ import { Users, CalendarCheck, Clock, XCircle, CheckCircle2, TrendingUp } from '
 
 export default async function StatCards() {
   const stats = await getAppointmentStats();
-  const total = Object.values(stats).reduce((acc, curr) => acc + curr, 0);
-
+  
   const cards = [
     {
       title: 'Total',
-      value: total,
+      value: stats.total,
+      subtitle: 'All time',
       icon: Users,
-      iconBg: 'bg-blue-100',
-      iconColor: 'text-blue-600',
-      accent: 'from-blue-500 to-blue-600',
-      border: 'border-blue-100',
-      trend: 'All time',
+      color: 'from-blue-500/20 to-blue-500/5',
+      iconColor: 'text-blue-400',
+      borderColor: 'border-blue-500/20',
+      glow: 'shadow-blue-500/10'
     },
     {
       title: 'Pending',
-      value: stats.pending || 0,
+      value: stats.pending,
+      subtitle: 'Awaiting review',
       icon: Clock,
-      iconBg: 'bg-amber-100',
-      iconColor: 'text-amber-600',
-      accent: 'from-amber-400 to-amber-500',
-      border: 'border-amber-100',
-      trend: 'Awaiting review',
+      color: 'from-amber-500/20 to-amber-500/5',
+      iconColor: 'text-amber-400',
+      borderColor: 'border-amber-500/20',
+      glow: 'shadow-amber-500/10'
     },
     {
       title: 'Confirmed',
-      value: stats.confirmed || 0,
+      value: stats.confirmed,
+      subtitle: 'Scheduled',
       icon: CalendarCheck,
-      iconBg: 'bg-teal-100',
-      iconColor: 'text-teal-600',
-      accent: 'from-teal-400 to-teal-600',
-      border: 'border-teal-100',
-      trend: 'Scheduled',
+      color: 'from-teal-500/20 to-teal-500/5',
+      iconColor: 'text-teal-400',
+      borderColor: 'border-teal-500/20',
+      glow: 'shadow-teal-500/10'
     },
     {
       title: 'Completed',
-      value: stats.completed || 0,
+      value: stats.completed,
+      subtitle: 'Seen patients',
       icon: CheckCircle2,
-      iconBg: 'bg-emerald-100',
-      iconColor: 'text-emerald-600',
-      accent: 'from-emerald-400 to-emerald-600',
-      border: 'border-emerald-100',
-      trend: 'Seen patients',
+      color: 'from-emerald-500/20 to-emerald-500/5',
+      iconColor: 'text-emerald-400',
+      borderColor: 'border-emerald-500/20',
+      glow: 'shadow-emerald-500/10'
     },
     {
       title: 'Cancelled',
-      value: stats.cancelled || 0,
+      value: stats.cancelled,
+      subtitle: 'Not attended',
       icon: XCircle,
-      iconBg: 'bg-rose-100',
-      iconColor: 'text-rose-600',
-      accent: 'from-rose-400 to-rose-500',
-      border: 'border-rose-100',
-      trend: 'Not attended',
-    },
+      color: 'from-rose-500/20 to-rose-500/5',
+      iconColor: 'text-rose-400',
+      borderColor: 'border-rose-500/20',
+      glow: 'shadow-rose-500/10'
+    }
   ];
 
   return (
-    <div className="grid gap-4 grid-cols-2 lg:grid-cols-5 mb-6">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
       {cards.map((card) => {
         const Icon = card.icon;
         return (
-          <div
-            key={card.title}
-            className={`relative bg-white rounded-2xl border ${card.border} shadow-sm overflow-hidden p-5 flex flex-col gap-3 hover:shadow-md transition-shadow`}
+          <div 
+            key={card.title} 
+            className={`relative bg-[#0f172a] rounded-2xl p-5 border ${card.borderColor} shadow-lg ${card.glow} overflow-hidden group hover:border-opacity-50 transition-all duration-300`}
           >
-            {/* Top accent bar */}
-            <div className={`absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r ${card.accent}`} />
-
-            {/* Icon + Title */}
-            <div className="flex items-start justify-between">
-              <div className={`w-9 h-9 rounded-xl ${card.iconBg} flex items-center justify-center flex-shrink-0`}>
-                <Icon className={`h-4.5 w-4.5 ${card.iconColor}`} />
+            {/* Background Gradient */}
+            <div className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-40 group-hover:opacity-100 transition-opacity duration-300`} />
+            
+            <div className="relative z-10 flex flex-col h-full">
+              <div className="flex justify-between items-start mb-4">
+                <div className={`p-2.5 rounded-xl bg-slate-900/50 border border-slate-700/50 backdrop-blur-sm ${card.iconColor}`}>
+                  <Icon className="h-5 w-5" />
+                </div>
+                {card.title === 'Completed' && (
+                  <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-bold text-emerald-400">
+                    <TrendingUp className="h-3 w-3" /> +12%
+                  </div>
+                )}
               </div>
-              <TrendingUp className="h-3.5 w-3.5 text-slate-200" />
+              
+              <div className="mt-auto">
+                <h3 className="text-3xl font-black text-white tracking-tight mb-1 font-sans">{card.value}</h3>
+                <p className="text-sm font-bold text-slate-300">{card.title}</p>
+                <p className="text-[10px] text-slate-500 mt-0.5 uppercase tracking-wider">{card.subtitle}</p>
+              </div>
             </div>
-
-            {/* Value */}
-            <div>
-              <div className="text-3xl font-black text-slate-800 leading-none">{card.value}</div>
-              <div className="text-xs font-bold text-slate-500 mt-1">{card.title}</div>
-              <div className="text-[10px] text-slate-300 font-medium mt-0.5">{card.trend}</div>
-            </div>
+            
+            {/* Decorative bottom bar */}
+            <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${card.color} opacity-50`} />
           </div>
         );
       })}
