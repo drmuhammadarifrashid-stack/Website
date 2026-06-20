@@ -13,6 +13,7 @@ import type {
 } from '@/types/appointment';
 import Appointment, { IAppointment } from '@/models/appointment';
 import dbConnect from '@/lib/db';
+import { unstable_noStore as noStore } from 'next/cache';
 
 // ============================================================
 // Client-side Validation (runs before API call)
@@ -268,6 +269,7 @@ export async function getUpcomingAppointments(): Promise<IAppointment[]> {
 export async function getAppointmentStats(): Promise<
   Record<AppointmentStatus, number>
 > {
+  noStore();
   await dbConnect();
   return Appointment.countByStatus();
 }
