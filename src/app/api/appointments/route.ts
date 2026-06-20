@@ -146,8 +146,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const errMsg = error instanceof Error ? error.message : String(error);
     return NextResponse.json(
-      { success: false, error: 'Failed to create appointment. Please try again.' },
+      { success: false, error: 'Failed to create appointment. Please try again.', debug: errMsg },
       { status: 500 }
     );
   }
