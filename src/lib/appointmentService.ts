@@ -267,7 +267,7 @@ export async function getUpcomingAppointments(): Promise<IAppointment[]> {
  * Get appointment count by status (dashboard stats)
  */
 export async function getAppointmentStats(): Promise<
-  Record<AppointmentStatus, number>
+  Record<AppointmentStatus, number> & { total: number }
 > {
   noStore();
   await dbConnect();

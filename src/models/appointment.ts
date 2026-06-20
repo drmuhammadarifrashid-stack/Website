@@ -43,7 +43,7 @@ export interface IAppointmentModel extends Model<IAppointment> {
   findByStatus(status: AppointmentStatus): Promise<IAppointment[]>;
   findByLocation(location: AppointmentLocation): Promise<IAppointment[]>;
   findUpcoming(): Promise<IAppointment[]>;
-  countByStatus(): Promise<Record<AppointmentStatus, number>>;
+  countByStatus(): Promise<Record<AppointmentStatus, number> & { total: number }>;
 }
 
 // ============================================================
@@ -312,7 +312,7 @@ AppointmentSchema.statics.findUpcoming = function (): Promise<IAppointment[]> {
 };
 
 AppointmentSchema.statics.countByStatus = async function (): Promise<
-  Record<AppointmentStatus, number>
+  Record<AppointmentStatus, number> & { total: number }
 > {
   const results = await this.aggregate([
     { $group: { _id: '$status', count: { $sum: 1 } } },
@@ -323,10 +323,12 @@ AppointmentSchema.statics.countByStatus = async function (): Promise<
     completed: 0,
     cancelled: 0,
   };
+  let total = 0;
   for (const r of results) {
     counts[r._id as string] = r.count as number;
+    total += r.count as number;
   }
-  return counts as Record<AppointmentStatus, number>;
+  return { ...counts, total } as Record<AppointmentStatus, number> & { total: number };
 };
 
 // ============================================================
