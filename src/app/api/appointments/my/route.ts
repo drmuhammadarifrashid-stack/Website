@@ -10,7 +10,7 @@ import { sendRescheduleRequestAlert } from '@/lib/email';
 // Returns appointments belonging to the logged-in patient
 // ============================================================
 
-export async function GET(_request: NextRequest) {
+export async function GET() {
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.id) {

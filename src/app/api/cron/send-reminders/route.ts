@@ -56,9 +56,10 @@ export async function GET(request: NextRequest) {
             appointmentId: apt._id.toString(),
           });
           sentCount++;
-        } catch (err: any) {
+        } catch (err: unknown) {
           console.error(`[Cron] Failed to send reminder to ${apt.email}:`, err);
-          errors.push(`${apt.name} (${apt.email}): ${err.message || err}`);
+          const errorMessage = err instanceof Error ? err.message : String(err);
+          errors.push(`${apt.name} (${apt.email}): ${errorMessage}`);
         }
       } else {
         console.log(`[Cron] Skipping reminder for ${apt.name} — no email address associated.`);
@@ -72,10 +73,11 @@ export async function GET(request: NextRequest) {
       failed: errors.length,
       errors: errors.length > 0 ? errors : undefined,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[GET /api/cron/send-reminders] Unhandled error:', error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
     return NextResponse.json(
-      { success: false, error: 'Failed to run cron job', details: error.message || error },
+      { success: false, error: 'Failed to run cron job', details: errorMessage },
       { status: 500 }
     );
   }

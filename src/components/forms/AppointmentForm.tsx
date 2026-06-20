@@ -319,7 +319,7 @@ export function AppointmentForm() {
     fetchBlockedDates();
     // Reset date and time values upon location change
     setValue('appointmentDate', '');
-    setValue('appointmentTime', undefined as any);
+    setValue('appointmentTime', undefined as unknown as typeof TIME_SLOTS[number]);
     setAvailableSlots([]);
     setDateError('');
   }, [selectedLocation, setValue]);
@@ -335,7 +335,7 @@ export function AppointmentForm() {
     if (blockedDates.includes(selectedDate)) {
       setDateError('The doctor is not available on this date. Please choose another date.');
       setValue('appointmentDate', '');
-      setValue('appointmentTime', undefined as any);
+      setValue('appointmentTime', undefined as unknown as typeof TIME_SLOTS[number]);
       setAvailableSlots([]);
       return;
     }
@@ -343,7 +343,7 @@ export function AppointmentForm() {
     if (fullyBookedDates.includes(selectedDate)) {
       setDateError('This date is fully booked. Please select another date.');
       setValue('appointmentDate', '');
-      setValue('appointmentTime', undefined as any);
+      setValue('appointmentTime', undefined as unknown as typeof TIME_SLOTS[number]);
       setAvailableSlots([]);
       return;
     }
@@ -364,7 +364,7 @@ export function AppointmentForm() {
         } else if (json.success && !json.available) {
           setDateError(json.message || 'No slots available for this date.');
           setValue('appointmentDate', '');
-          setValue('appointmentTime', undefined as any);
+          setValue('appointmentTime', undefined as unknown as typeof TIME_SLOTS[number]);
           setAvailableSlots([]);
         }
       } catch (err) {

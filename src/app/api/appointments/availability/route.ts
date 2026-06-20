@@ -31,11 +31,11 @@ export async function GET(request: NextRequest) {
     // ─── Scenario 1: Date is provided (check slots for that date) ────
     if (date) {
       // 1. Check if date is blocked by admin
-      const blockConfig = await (Availability.findOne as Function)({
+      const blockConfig = await Availability.findOne({
         date,
         location,
         isBlocked: true,
-      }).exec();
+      } as Record<string, unknown>).exec();
 
       if (blockConfig) {
         return NextResponse.json({
@@ -48,11 +48,11 @@ export async function GET(request: NextRequest) {
       }
 
       // 2. Check if date is fully booked (10+ appointments limit)
-      const activeCount = await (Appointment.countDocuments as Function)({
+      const activeCount = await Appointment.countDocuments({
         location,
         appointmentDate: date,
         status: { $in: ['pending', 'confirmed'] },
-      }).exec();
+      } as Record<string, unknown>).exec();
 
       if (activeCount >= 10) {
         return NextResponse.json({
@@ -65,22 +65,22 @@ export async function GET(request: NextRequest) {
       }
 
       // 3. Find already booked slots on this date
-      const bookedAppointments = await (Appointment.find as Function)({
+      const bookedAppointments = await Appointment.find({
         location,
         appointmentDate: date,
         status: { $in: ['pending', 'confirmed'] },
-      }).select('appointmentTime').exec();
+      } as Record<string, unknown>).select('appointmentTime').exec();
 
       const bookedSlots = bookedAppointments.map(
         (a: { appointmentTime: string }) => a.appointmentTime
       );
 
       // Check if there are custom hours set (not fully blocked, but custom hours)
-      const customHoursConfig = await (Availability.findOne as Function)({
+      const customHoursConfig = await Availability.findOne({
         date,
         location,
         isBlocked: false,
-      }).exec();
+      } as Record<string, unknown>).exec();
 
       let availableSlots = TIME_SLOTS.filter((slot) => !bookedSlots.includes(slot));
 
@@ -101,11 +101,11 @@ export async function GET(request: NextRequest) {
     // ─── Scenario 2: Date is NOT provided (return blocked & fully booked list) ───
     
     // 1. Fetch admin blocked dates from today onwards
-    const blockedConfigs = await (Availability.find as Function)({
+    const blockedConfigs = await Availability.find({
       location,
       date: { $gte: todayStr },
       isBlocked: true,
-    }).select('date').exec();
+    } as Record<string, unknown>).select('date').exec();
 
     const blockedDates = blockedConfigs.map((c: { date: string }) => c.date);
 

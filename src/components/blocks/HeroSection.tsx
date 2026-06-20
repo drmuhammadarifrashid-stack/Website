@@ -55,7 +55,7 @@ export function HeroSection({
                 📅 {primaryButtonText}
               </Button>
               <Button href={secondaryButtonHref} variant="secondary" size="lg">
-                Meet the Doctor
+                {secondaryButtonText}
               </Button>
             </div>
 

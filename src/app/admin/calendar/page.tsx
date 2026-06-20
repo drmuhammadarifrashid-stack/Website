@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, Loader2, Phone, MapPin, CheckCircle, XCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, Loader2, Phone, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface Appointment {

@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import { Badge } from '../ui/badge';
 
@@ -76,7 +75,7 @@ export function DoctorProfileCard({
         {linkHref && (
           <div style={{ marginTop: '2rem' }}>
             <Button href={linkHref} variant="primary" size="lg" className="w-full" style={{ width: '100%' }}>
-              Book an Appointment
+              {linkText}
             </Button>
           </div>
         )}
