@@ -64,7 +64,8 @@ export default async function StatCards() {
         return (
           <div 
             key={card.title} 
-            className={`relative bg-[#0f172a] rounded-3xl p-6 min-h-[180px] border ${card.borderColor} shadow-xl ${card.glow} overflow-hidden group hover:border-opacity-100 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between`}
+            className={`relative bg-[#0f172a] rounded-3xl border ${card.borderColor} shadow-xl ${card.glow} overflow-hidden group hover:border-opacity-100 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between`}
+            style={{ minHeight: '180px', padding: '1.5rem', paddingBottom: '2rem' }}
           >
             {/* Background Gradient */}
             <div className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-60 group-hover:opacity-100 transition-opacity duration-300`} />

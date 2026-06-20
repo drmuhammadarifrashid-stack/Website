@@ -75,7 +75,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </div>
 
       {/* Nav Links */}
-      <nav className="flex-1 px-4 space-y-4">
+      <nav className="flex-1 px-4" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '0.5rem' }}>
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           const Icon = item.icon;
@@ -84,11 +84,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               key={item.name}
               href={item.href}
               onClick={() => setIsMobileOpen(false)}
-              className={`group flex items-center gap-4 px-4 py-4 rounded-2xl text-sm transition-all duration-200 ${
+              className={`group flex items-center px-4 rounded-2xl transition-all duration-200 ${
                 isActive
                   ? 'bg-teal-500/10 border border-teal-500/20 shadow-sm shadow-teal-900/10'
                   : 'hover:bg-slate-800/40 border border-transparent'
               }`}
+              style={{ gap: '1rem', padding: '1rem' }}
             >
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
                 isActive
@@ -110,8 +111,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </nav>
 
       {/* Footer */}
-      <div className="p-6 border-t border-slate-800/60 bg-slate-900/50 mb-8">
-        <div className="flex items-center gap-3 px-2 mb-6">
+      <div className="border-t border-slate-800/60 bg-slate-900/50" style={{ padding: '1.5rem', paddingBottom: '2.5rem', marginBottom: '1.5rem' }}>
+        <div className="flex items-center px-2" style={{ gap: '0.75rem', marginBottom: '1.5rem' }}>
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-slate-700 to-slate-800 border border-slate-700 flex items-center justify-center text-xl flex-shrink-0">
             👨‍⚕️
           </div>
@@ -122,8 +123,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
         <button
           onClick={() => signOut({ callbackUrl: '/' })}
-          className="w-full flex items-center justify-center gap-3 px-4 py-5 rounded-2xl text-base font-black bg-slate-800/40 hover:bg-rose-950/40 border border-slate-700/40 hover:border-rose-900/40 transition-all duration-200 cursor-pointer group"
-          style={{ color: '#94a3b8' }}
+          className="w-full flex items-center justify-center rounded-2xl font-black bg-slate-800/40 hover:bg-rose-950/40 border border-slate-700/40 hover:border-rose-900/40 transition-all duration-200 cursor-pointer group"
+          style={{ gap: '0.75rem', padding: '1.25rem 1rem', fontSize: '1rem', color: '#94a3b8' }}
         >
           <LogOut className="h-5 w-5 group-hover:rotate-12 transition-transform duration-200 group-hover:text-rose-400" />
           <span className="group-hover:text-rose-400 transition-colors">Sign Out</span>

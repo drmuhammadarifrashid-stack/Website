@@ -268,16 +268,18 @@ export default function AppointmentsTable() {
           <div className="flex flex-col md:flex-row gap-5 items-center justify-between">
             {/* Search Input */}
             <div className="relative w-full md:max-w-lg group">
-              <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none">
+              <div 
+                className="absolute flex items-center justify-center pointer-events-none"
+                style={{ left: '1rem', top: '50%', transform: 'translateY(-50%)' }}
+              >
                 <Search className="h-5 w-5 text-slate-400 group-focus-within:text-teal-400 transition-colors" />
               </div>
-              {/* Increased py-4 for thicker search bar, fixed icon position */}
               <input
                 value={search}
                 onChange={e => { setSearch(e.target.value); setPage(1); }}
                 placeholder="Search by patient name, phone, or location..."
-                className="w-full pl-12 pr-5 py-4 text-base bg-[#020817] border border-slate-700 focus:bg-[#020817] rounded-2xl placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500 transition-all shadow-inner"
-                style={{ color: '#ffffff' }}
+                className="w-full text-base bg-[#020817] border border-slate-700 focus:bg-[#020817] rounded-2xl placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500 transition-all shadow-inner"
+                style={{ paddingLeft: '3rem', paddingRight: '1.25rem', paddingTop: '1rem', paddingBottom: '1rem', color: '#ffffff' }}
               />
             </div>
             
@@ -293,19 +295,19 @@ export default function AppointmentsTable() {
           </div>
 
           {/* Status Pills */}
-          <div className="flex gap-3 overflow-x-auto pb-3 scrollbar-hide -mx-1 px-1">
+          <div className="flex overflow-x-auto scrollbar-hide -mx-1 px-1" style={{ gap: '0.75rem', paddingBottom: '0.75rem' }}>
             {filterTabs.map(tab => {
               const isActive = statusFilter === tab.value;
               return (
                 <button
                   key={tab.value}
                   onClick={() => { setStatusFilter(tab.value); setPage(1); }}
-                  className={`flex-shrink-0 px-6 py-3 md:px-8 md:py-3.5 rounded-2xl text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
+                  className={`flex-shrink-0 rounded-2xl text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
                     isActive
                       ? 'bg-teal-600 shadow-lg shadow-teal-900/40 border border-teal-500'
                       : 'bg-slate-800 border border-slate-700 hover:border-slate-600 hover:bg-slate-700'
                   }`}
-                  style={{ color: isActive ? '#ffffff' : '#cbd5e1' }}
+                  style={{ padding: '0.75rem 1.5rem', color: isActive ? '#ffffff' : '#cbd5e1' }}
                 >
                   {tab.label}
                 </button>
@@ -363,9 +365,22 @@ export default function AppointmentsTable() {
                             <span className="text-sm font-semibold mt-1 block" style={{ color: '#94a3b8' }}>{apt.age}y • {apt.gender}</span>
                           </div>
                         </div>
-                        <span className={`text-[11px] font-black px-3.5 py-1.5 rounded-full border uppercase tracking-wider leading-none flex items-center justify-center whitespace-nowrap h-7 ${badgeStyle}`} style={{ color: badgeColor }}>
+                        <div className="flex items-center justify-center border whitespace-nowrap" style={{ 
+                          color: badgeColor, 
+                          backgroundColor: badgeStyle.includes('bg-teal') ? 'rgba(20, 184, 166, 0.1)' : badgeStyle.includes('bg-emerald') ? 'rgba(16, 185, 129, 0.1)' : badgeStyle.includes('bg-rose') ? 'rgba(244, 63, 94, 0.1)' : badgeStyle.includes('bg-amber') ? 'rgba(245, 158, 11, 0.1)' : 'transparent',
+                          borderColor: badgeStyle.includes('border-teal') ? 'rgba(20, 184, 166, 0.3)' : badgeStyle.includes('border-emerald') ? 'rgba(16, 185, 129, 0.3)' : badgeStyle.includes('border-rose') ? 'rgba(244, 63, 94, 0.3)' : badgeStyle.includes('border-amber') ? 'rgba(245, 158, 11, 0.3)' : '#334155',
+                          padding: '0.375rem 0.875rem', 
+                          borderRadius: '9999px',
+                          fontSize: '0.6875rem',
+                          fontWeight: '900',
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.05em',
+                          lineHeight: '1',
+                          height: 'auto',
+                          marginTop: '0.25rem'
+                        }}>
                           {apt.status.replace('_', ' ')}
-                        </span>
+                        </div>
                       </div>
 
                       {/* Content Grid */}
@@ -426,11 +441,11 @@ export default function AppointmentsTable() {
                         )}
                         
                         {/* Secondary Actions */}
-                        <div className="flex w-full gap-3 mt-2">
-                          <button onClick={() => openWhatsApp(apt, apt.status)} className="flex-1 py-3.5 border border-[#25D366]/40 bg-[#25D366]/10 hover:bg-[#25D366]/20 rounded-xl text-sm font-bold transition-all cursor-pointer flex items-center justify-center gap-2.5" style={{ color: '#25D366' }}>
+                        <div className="flex w-full" style={{ gap: '0.75rem', marginTop: '0.5rem' }}>
+                          <button onClick={() => openWhatsApp(apt, apt.status)} className="border border-[#25D366]/40 bg-[#25D366]/10 hover:bg-[#25D366]/20 rounded-xl text-sm font-bold transition-all cursor-pointer flex items-center justify-center" style={{ color: '#25D366', padding: '0.875rem 0', flex: '1 1 auto', gap: '0.5rem' }}>
                              <MessageCircle className="h-5 w-5 shrink-0" /> <span className="hidden sm:inline">Send WhatsApp</span><span className="sm:hidden">WhatsApp</span>
                           </button>
-                          <button onClick={() => handleDelete(apt)} className="shrink-0 px-5 py-3.5 border border-slate-700 bg-[#020817] hover:bg-rose-950/60 hover:border-rose-900/60 rounded-xl transition-all cursor-pointer flex items-center justify-center group" style={{ color: '#64748b' }}>
+                          <button onClick={() => handleDelete(apt)} className="border border-slate-700 bg-[#020817] hover:bg-rose-950/60 hover:border-rose-900/60 rounded-xl transition-all cursor-pointer flex items-center justify-center group" style={{ color: '#64748b', padding: '0.875rem 1.25rem', flexShrink: 0 }}>
                              <Trash2 className="h-5 w-5 group-hover:text-rose-400 transition-colors shrink-0" />
                           </button>
                         </div>
