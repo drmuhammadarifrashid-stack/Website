@@ -245,16 +245,18 @@ AppointmentSchema.index({ name: 'text', reason: 'text' });
 // ============================================================
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-AppointmentSchema.pre('save', function (next: any) {
+AppointmentSchema.pre('save', async function () {
   // Normalize phone: strip spaces, dashes, parentheses
-  this.phone = this.phone.replace(/[\s\-()]/g, '');
+  if (this.phone) {
+    this.phone = this.phone.replace(/[\s\-()]/g, '');
+  }
 
   // Normalize name to title case
-  this.name = this.name
-    .toLowerCase()
-    .replace(/\b\w/g, (char) => char.toUpperCase());
-
-  next();
+  if (this.name) {
+    this.name = this.name
+      .toLowerCase()
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+  }
 });
 
 // ============================================================
