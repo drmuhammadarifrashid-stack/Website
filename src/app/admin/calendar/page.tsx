@@ -215,41 +215,41 @@ export default function AdminCalendarPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4" style={{ padding: '2.5rem', paddingBottom: '0' }}>
         <div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight">Calendar Planner</h1>
-          <p className="text-sm text-slate-400 mt-0.5">Manage daily schedules and time slots</p>
+          <h1 className="text-2xl font-black tracking-tight" style={{ color: '#ffffff' }}>Calendar Planner</h1>
+          <p className="text-sm mt-0.5" style={{ color: '#94a3b8' }}>Manage daily schedules and time slots</p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6" style={{ padding: '2.5rem', paddingTop: '1.5rem' }}>
         {/* Calendar Grid Box */}
-        <div className="xl:col-span-2 bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col">
+        <div className="xl:col-span-2 bg-[#0f172a] rounded-3xl shadow-xl border border-slate-800 overflow-hidden flex flex-col">
           {/* Header Controls */}
-          <div className="px-6 py-5 border-b border-slate-50 flex items-center justify-between">
+          <div className="px-6 py-5 border-b border-slate-800 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center">
-                <CalendarIcon className="h-5 w-5 text-teal-600" />
+              <div className="w-10 h-10 rounded-xl bg-teal-500/10 border border-teal-500/30 flex items-center justify-center">
+                <CalendarIcon className="h-5 w-5 text-teal-400" />
               </div>
-              <h2 className="text-xl font-bold text-slate-800">
+              <h2 className="text-xl font-bold" style={{ color: '#ffffff' }}>
                 {monthNames[currentMonth]} {currentYear}
               </h2>
             </div>
-            <div className="flex items-center gap-1.5 p-1 bg-slate-50 rounded-xl border border-slate-100">
-              <button onClick={prevMonth} className="h-8 w-8 rounded-lg flex items-center justify-center hover:bg-white hover:shadow-sm text-slate-500 transition-all cursor-pointer">
+            <div className="flex items-center gap-1.5 p-1 bg-slate-800/50 rounded-xl border border-slate-700">
+              <button onClick={prevMonth} className="h-8 w-8 rounded-lg flex items-center justify-center hover:bg-slate-700 hover:shadow-sm text-slate-300 transition-all cursor-pointer">
                 <ChevronLeft className="h-4 w-4" />
               </button>
-              <button onClick={() => setCurrentDate(new Date())} className="h-8 px-3 text-xs font-bold rounded-lg flex items-center justify-center hover:bg-white hover:shadow-sm text-slate-700 transition-all cursor-pointer">
+              <button onClick={() => setCurrentDate(new Date())} className="h-8 px-3 text-xs font-bold rounded-lg flex items-center justify-center hover:bg-slate-700 hover:shadow-sm text-slate-300 transition-all cursor-pointer">
                 Today
               </button>
-              <button onClick={nextMonth} className="h-8 w-8 rounded-lg flex items-center justify-center hover:bg-white hover:shadow-sm text-slate-500 transition-all cursor-pointer">
+              <button onClick={nextMonth} className="h-8 w-8 rounded-lg flex items-center justify-center hover:bg-slate-700 hover:shadow-sm text-slate-300 transition-all cursor-pointer">
                 <ChevronRight className="h-4 w-4" />
               </button>
             </div>
           </div>
 
           {/* Weekday headers */}
-          <div className="grid grid-cols-7 border-b border-slate-50 text-center text-xs font-bold text-slate-400 uppercase tracking-wider py-3 bg-slate-50/50">
+          <div className="grid grid-cols-7 border-b border-slate-800 text-center text-xs font-bold text-slate-400 uppercase tracking-wider py-3 bg-slate-800/30">
             <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
           </div>
 
@@ -260,7 +260,7 @@ export default function AdminCalendarPage() {
               <span className="text-sm font-medium text-slate-400">Loading schedule...</span>
             </div>
           ) : (
-            <div className="grid grid-cols-7 flex-1 min-h-[460px] bg-slate-100/50 gap-px">
+            <div className="grid grid-cols-7 flex-1 min-h-[460px] bg-slate-800/50 gap-px">
               {calendarCells.map((cell, idx) => {
                 const isSelected = selectedDate === cell.dateKey;
                 const dayAppointments = cell.dateKey ? appointmentsByDate[cell.dateKey] || [] : [];
@@ -270,19 +270,19 @@ export default function AdminCalendarPage() {
                   <div
                     key={idx}
                     onClick={() => cell.dateKey && setSelectedDate(cell.dateKey)}
-                    className={`relative p-2.5 bg-white flex flex-col transition-all min-h-[90px] ${
-                      cell.day ? 'cursor-pointer hover:bg-slate-50' : 'bg-transparent'
-                    } ${isSelected ? 'ring-2 ring-teal-500 ring-inset bg-teal-50/30' : ''}`}
+                    className={`relative p-2.5 flex flex-col transition-all min-h-[90px] ${
+                      cell.day ? 'cursor-pointer hover:bg-slate-800/80' : ''
+                    } ${!cell.day ? 'bg-transparent' : isSelected ? 'ring-2 ring-teal-500 ring-inset bg-teal-500/10' : 'bg-[#0f172a]'}`}
                   >
                     {cell.day && (
                       <div className="flex justify-between items-start w-full">
                         <span className={`text-xs font-bold flex items-center justify-center w-6 h-6 rounded-full transition-colors ${
-                          isSelected ? 'bg-teal-600 text-white shadow-sm' : 'text-slate-600'
-                        }`}>
+                          isSelected ? 'bg-teal-600 text-white shadow-sm' : ''
+                        }`} style={{ color: isSelected ? '#ffffff' : '#cbd5e1' }}>
                           {cell.day}
                         </span>
                         {activeAppointments.length > 0 && (
-                          <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded-md">
+                          <span className="text-[10px] font-bold text-slate-300 bg-slate-800 px-1.5 py-0.5 rounded-md">
                             {activeAppointments.length}
                           </span>
                         )}
@@ -299,7 +299,7 @@ export default function AdminCalendarPage() {
                             if (apt.status === 'rescheduled_requested') dot = 'bg-amber-400';
 
                             return (
-                              <div key={apt.id} className="flex items-center gap-1.5 text-[10px] font-semibold text-slate-600 bg-slate-50 px-1.5 py-1 rounded truncate border border-slate-100/50">
+                              <div key={apt.id} className="flex items-center gap-1.5 text-[10px] font-semibold bg-slate-800 px-1.5 py-1 rounded truncate border border-slate-700" style={{ color: '#e2e8f0' }}>
                                 <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${dot}`} />
                                 <span className="truncate">{formatTime(apt.appointmentTime)} {apt.name.split(' ')[0]}</span>
                               </div>
@@ -332,23 +332,23 @@ export default function AdminCalendarPage() {
         </div>
 
         {/* Selected Day Details Pane */}
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col h-full max-h-[600px]">
-          <div className="px-6 py-5 border-b border-slate-50">
-            <h3 className="text-lg font-black text-slate-800">
+        <div className="bg-[#0f172a] rounded-3xl shadow-xl border border-slate-800 flex flex-col h-full max-h-[600px]">
+          <div className="px-6 py-5 border-b border-slate-800">
+            <h3 className="text-lg font-black" style={{ color: '#ffffff' }}>
               {selectedDate
                 ? new Date(selectedDate).toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' })
                 : 'Select a Date'}
             </h3>
-            <p className="text-xs text-slate-400 font-medium mt-1">
+            <p className="text-xs font-medium mt-1" style={{ color: '#94a3b8' }}>
               {selectedDayAppointments.filter(a => a.status !== 'cancelled').length} Active Appointments
             </p>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-50/30">
+          <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-[#020817]">
             {selectedDayAppointments.length === 0 ? (
-              <div className="flex flex-col items-center justify-center h-40 text-slate-400 gap-2">
-                <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center">
-                  <Clock className="h-5 w-5 text-slate-300" />
+              <div className="flex flex-col items-center justify-center h-40 gap-2" style={{ color: '#94a3b8' }}>
+                <div className="w-12 h-12 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center">
+                  <Clock className="h-5 w-5 text-slate-500" />
                 </div>
                 <p className="text-sm font-semibold">No appointments today</p>
               </div>
@@ -361,15 +361,15 @@ export default function AdminCalendarPage() {
                 if (apt.status === 'rescheduled_requested') badgeBg = 'bg-orange-50 text-orange-700 border-orange-200';
 
                 return (
-                  <div key={apt.id} className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm space-y-3 relative group hover:border-slate-200 transition-colors">
+                  <div key={apt.id} className="bg-[#0f172a] p-4 rounded-3xl border border-slate-800 shadow-xl space-y-3 relative group hover:border-slate-700 transition-colors">
                     <div className="flex justify-between items-start gap-2">
                       <div className="flex gap-3 items-center">
-                        <div className="w-9 h-9 rounded-xl bg-slate-50 flex items-center justify-center font-bold text-slate-600 text-sm">
+                        <div className="w-9 h-9 rounded-xl bg-[#020817] border border-slate-700 flex items-center justify-center font-bold text-sm" style={{ color: '#ffffff' }}>
                           {apt.name.charAt(0)}
                         </div>
                         <div>
-                          <h4 className="font-bold text-sm text-slate-800 leading-tight">{apt.name}</h4>
-                          <span className="text-[10px] text-slate-400 font-medium">
+                          <h4 className="font-bold text-sm leading-tight" style={{ color: '#ffffff' }}>{apt.name}</h4>
+                          <span className="text-[10px] font-medium" style={{ color: '#94a3b8' }}>
                             {apt.age}y • {apt.gender}
                           </span>
                         </div>
@@ -379,9 +379,9 @@ export default function AdminCalendarPage() {
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2 text-xs text-slate-600 font-medium bg-slate-50/50 p-2.5 rounded-xl border border-slate-50">
+                    <div className="grid grid-cols-2 gap-2 text-xs font-medium bg-[#020817] p-2.5 rounded-xl border border-slate-800" style={{ color: '#cbd5e1' }}>
                       <div className="flex items-center gap-1.5">
-                        <Clock className="h-3.5 w-3.5 text-teal-500" /> {formatTime(apt.appointmentTime)}
+                        <Clock className="h-3.5 w-3.5 text-teal-400" /> {formatTime(apt.appointmentTime)}
                       </div>
                       <div className="flex items-center gap-1.5">
                         <Phone className="h-3.5 w-3.5 text-slate-400" /> {apt.phone}
@@ -391,12 +391,12 @@ export default function AdminCalendarPage() {
                       </div>
                     </div>
 
-                    <div className="text-xs text-slate-500 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-                      <span className="font-semibold text-slate-700">Reason:</span> {apt.reason}
+                    <div className="text-xs bg-[#020817] p-2.5 rounded-xl border border-slate-800" style={{ color: '#94a3b8' }}>
+                      <span className="font-semibold" style={{ color: '#ffffff' }}>Reason:</span> {apt.reason}
                     </div>
 
                     {apt.status === 'rescheduled_requested' && apt.rescheduleNote && (
-                      <div className="bg-amber-50 border border-amber-100 text-amber-800 p-2.5 rounded-xl text-xs">
+                      <div className="bg-amber-500/10 border border-amber-500/30 p-2.5 rounded-xl text-xs" style={{ color: '#fbbf24' }}>
                         <strong>Note:</strong> {apt.rescheduleNote}
                       </div>
                     )}
@@ -404,26 +404,26 @@ export default function AdminCalendarPage() {
                     {/* Actions */}
                     <div className="flex flex-wrap gap-1.5 pt-1">
                       {apt.status === 'pending' && (
-                        <button onClick={() => updateStatus(apt.id, 'confirmed', apt)} className="flex-1 py-1.5 bg-teal-600 hover:bg-teal-700 text-white rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center justify-center gap-1">
+                        <button onClick={() => updateStatus(apt.id, 'confirmed', apt)} className="flex-1 py-1.5 bg-teal-600 hover:bg-teal-500 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center justify-center gap-1" style={{ color: '#ffffff' }}>
                           <Check className="h-3 w-3" /> Confirm
                         </button>
                       )}
                       {apt.status === 'confirmed' && (
-                        <button onClick={() => updateStatus(apt.id, 'completed', apt)} className="flex-1 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center justify-center gap-1">
+                        <button onClick={() => updateStatus(apt.id, 'completed', apt)} className="flex-1 py-1.5 bg-emerald-600 hover:bg-emerald-500 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center justify-center gap-1" style={{ color: '#ffffff' }}>
                           <Check className="h-3 w-3" /> Complete
                         </button>
                       )}
                       {apt.status !== 'completed' && apt.status !== 'cancelled' && (
-                        <button onClick={() => openRescheduleModal(apt)} className="flex-1 py-1.5 border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center justify-center gap-1">
+                        <button onClick={() => openRescheduleModal(apt)} className="flex-1 py-1.5 border border-slate-600 hover:bg-slate-700 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center justify-center gap-1" style={{ color: '#e2e8f0' }}>
                           Reschedule
                         </button>
                       )}
                       {apt.status !== 'cancelled' && apt.status !== 'completed' && (
-                        <button onClick={() => updateStatus(apt.id, 'cancelled', apt)} className="px-2.5 py-1.5 border border-rose-100 hover:bg-rose-50 text-rose-600 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center justify-center">
+                        <button onClick={() => updateStatus(apt.id, 'cancelled', apt)} className="px-2.5 py-1.5 border border-rose-900/60 bg-rose-950/40 hover:bg-rose-900/60 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center justify-center" style={{ color: '#fb7185' }}>
                           <X className="h-3.5 w-3.5" />
                         </button>
                       )}
-                      <button onClick={() => openWhatsApp(apt, apt.status)} className="px-2.5 py-1.5 border border-green-200 bg-green-50 hover:bg-green-100 text-green-700 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center justify-center">
+                      <button onClick={() => openWhatsApp(apt, apt.status)} className="px-2.5 py-1.5 border border-[#25D366]/40 bg-[#25D366]/10 hover:bg-[#25D366]/20 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center justify-center" style={{ color: '#25D366' }}>
                          <MessageCircle className="h-3.5 w-3.5" />
                       </button>
                     </div>
@@ -438,13 +438,13 @@ export default function AdminCalendarPage() {
       {/* Reschedule Modal */}
       {isRescheduleOpen && selectedAptForReschedule && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full border border-slate-100 overflow-hidden">
-            <div className="flex justify-between items-center p-6 border-b border-slate-100">
+          <div className="bg-[#0f172a] rounded-2xl shadow-2xl max-w-md w-full border border-slate-700 overflow-hidden">
+            <div className="flex justify-between items-center p-6 border-b border-slate-800">
               <div>
-                <h3 className="font-bold text-slate-900 text-lg">Reschedule Appointment</h3>
-                <p className="text-sm text-slate-400 mt-0.5">For <span className="font-semibold text-slate-600">{selectedAptForReschedule.name}</span></p>
+                <h3 className="font-bold text-lg" style={{ color: '#ffffff' }}>Reschedule Appointment</h3>
+                <p className="text-sm mt-0.5" style={{ color: '#94a3b8' }}>For <span className="font-semibold" style={{ color: '#2dd4bf' }}>{selectedAptForReschedule.name}</span></p>
               </div>
-              <button onClick={() => { setIsRescheduleOpen(false); setSelectedAptForReschedule(null); }} className="w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-600 transition-colors cursor-pointer">
+              <button onClick={() => { setIsRescheduleOpen(false); setSelectedAptForReschedule(null); }} className="w-8 h-8 rounded-lg hover:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white transition-colors cursor-pointer">
                 <X className="h-4 w-4" />
               </button>
             </div>
@@ -452,29 +452,29 @@ export default function AdminCalendarPage() {
             <form onSubmit={handleRescheduleSubmit} className="p-6 space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">New Date</label>
+                  <label className="block text-xs font-semibold mb-1.5" style={{ color: '#94a3b8' }}>New Date</label>
                   <input type="date" required value={rescheduleDate} onChange={(e) => setRescheduleDate(e.target.value)}
-                    className="w-full border border-slate-200 rounded-xl p-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-400 transition-all" />
+                    className="w-full bg-[#020817] border border-slate-700 rounded-xl p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-400 transition-all" style={{ color: '#ffffff' }} />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">New Time</label>
+                  <label className="block text-xs font-semibold mb-1.5" style={{ color: '#94a3b8' }}>New Time</label>
                   <input type="time" required value={rescheduleTime} onChange={(e) => setRescheduleTime(e.target.value)}
-                    className="w-full border border-slate-200 rounded-xl p-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-400 transition-all" />
+                    className="w-full bg-[#020817] border border-slate-700 rounded-xl p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-400 transition-all" style={{ color: '#ffffff' }} />
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1.5">Note for Patient</label>
+                <label className="block text-xs font-semibold mb-1.5" style={{ color: '#94a3b8' }}>Note for Patient</label>
                 <textarea value={adminNote} onChange={(e) => setAdminNote(e.target.value)} rows={3} placeholder="e.g. Your appointment has been moved to Friday."
-                  className="w-full border border-slate-200 rounded-xl p-2.5 text-sm text-slate-800 resize-none focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-400 transition-all" />
-                <p className="text-[10px] text-slate-400 mt-1">WhatsApp will open automatically with a reschedule message.</p>
+                  className="w-full bg-[#020817] border border-slate-700 rounded-xl p-2.5 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-400 transition-all" style={{ color: '#ffffff' }} />
+                <p className="text-[10px] mt-1" style={{ color: '#64748b' }}>WhatsApp will open automatically with a reschedule message.</p>
               </div>
               <div className="flex gap-3 pt-2">
                 <button type="button" onClick={() => { setIsRescheduleOpen(false); setSelectedAptForReschedule(null); }} disabled={submittingReschedule}
-                  className="flex-1 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-colors cursor-pointer disabled:opacity-50">
+                  className="flex-1 py-2.5 rounded-xl border border-slate-700 bg-slate-800 text-sm font-semibold hover:bg-slate-700 transition-colors cursor-pointer disabled:opacity-50" style={{ color: '#ffffff' }}>
                   Cancel
                 </button>
                 <button type="submit" disabled={submittingReschedule}
-                  className="flex-1 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-sm font-bold shadow-sm transition-colors cursor-pointer disabled:opacity-50 flex items-center justify-center gap-2">
+                  className="flex-1 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-sm font-bold shadow-sm transition-colors cursor-pointer disabled:opacity-50 flex items-center justify-center gap-2" style={{ color: '#ffffff' }}>
                   {submittingReschedule ? <Loader2 className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />}
                   {submittingReschedule ? 'Saving…' : 'Confirm & WhatsApp'}
                 </button>

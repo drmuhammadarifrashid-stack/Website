@@ -97,27 +97,28 @@ export default function AdminAvailabilityPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" style={{ padding: '2.5rem', paddingTop: '1.5rem' }}>
       <div>
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900">Availability management</h1>
-        <p className="text-gray-500">Block clinic dates, mark holidays, and control booking limits.</p>
+        <h1 className="text-3xl font-bold tracking-tight" style={{ color: '#ffffff' }}>Availability management</h1>
+        <p className="mt-0.5" style={{ color: '#94a3b8' }}>Block clinic dates, mark holidays, and control booking limits.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Block Date Form Card */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 h-fit">
-          <div className="flex items-center gap-2 border-b pb-3 mb-4">
-            <ShieldAlert className="h-5 w-5 text-teal-600" />
-            <h2 className="text-lg font-bold text-gray-900">Block a Date</h2>
+        <div className="bg-[#0f172a] rounded-3xl shadow-xl border border-slate-800 p-6 h-fit">
+          <div className="flex items-center gap-2 border-b border-slate-800 pb-3 mb-4">
+            <ShieldAlert className="h-5 w-5 text-teal-400" />
+            <h2 className="text-lg font-bold" style={{ color: '#ffffff' }}>Block a Date</h2>
           </div>
 
           <form onSubmit={handleBlockDate} className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1">Select Clinic Location</label>
+              <label className="block text-xs font-semibold mb-1" style={{ color: '#94a3b8' }}>Select Clinic Location</label>
               <select
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="w-full text-gray-900 bg-white border border-gray-300 rounded p-2 text-sm focus:border-teal-500 focus:outline-none"
+                className="w-full bg-[#020817] border border-slate-700 rounded-xl p-2.5 text-sm focus:border-teal-400 focus:ring-2 focus:ring-teal-500/30 focus:outline-none transition-all"
+                style={{ color: '#ffffff' }}
               >
                 <option value="Fauji Foundation Hospital">Fauji Foundation Hospital</option>
                 <option value="Muhammad Ali Khan Orthopedic & Surgical Hospital">
@@ -128,31 +129,33 @@ export default function AdminAvailabilityPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1">Select Date</label>
+              <label className="block text-xs font-semibold mb-1" style={{ color: '#94a3b8' }}>Select Date</label>
               <input
                 type="date"
                 required
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 min={new Date().toISOString().split('T')[0]}
-                className="w-full text-gray-900 border border-gray-300 rounded p-2 text-sm focus:border-teal-500 focus:outline-none"
+                className="w-full bg-[#020817] border border-slate-700 rounded-xl p-2.5 text-sm focus:border-teal-400 focus:ring-2 focus:ring-teal-500/30 focus:outline-none transition-all"
+                style={{ color: '#ffffff' }}
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1">Reason for Closure / Leave</label>
+              <label className="block text-xs font-semibold mb-1" style={{ color: '#94a3b8' }}>Reason for Closure / Leave</label>
               <Input
                 placeholder="e.g. Public Holiday, Conference, Leave"
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
-                className="text-gray-900 border-gray-300"
+                className="bg-[#020817] border-slate-700 focus-visible:ring-teal-500/30 rounded-xl transition-all"
+                style={{ color: '#ffffff' }}
               />
             </div>
 
             <Button
               type="submit"
               disabled={submitting}
-              className="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold"
+              className="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold rounded-xl shadow-sm shadow-teal-900/50"
             >
               {submitting ? (
                 <>
@@ -170,38 +173,38 @@ export default function AdminAvailabilityPage() {
         </div>
 
         {/* Currently Blocked Dates List */}
-        <div className="md:col-span-2 bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <div className="flex items-center gap-2 border-b pb-3 mb-4">
-            <Calendar className="h-5 w-5 text-teal-600" />
-            <h2 className="text-lg font-bold text-gray-900">Blocked Dates Schedule</h2>
+        <div className="md:col-span-2 bg-[#0f172a] rounded-3xl shadow-xl border border-slate-800 p-6">
+          <div className="flex items-center gap-2 border-b border-slate-800 pb-3 mb-4">
+            <Calendar className="h-5 w-5 text-teal-400" />
+            <h2 className="text-lg font-bold" style={{ color: '#ffffff' }}>Blocked Dates Schedule</h2>
           </div>
 
           {loading ? (
-            <div className="py-20 flex justify-center items-center text-gray-500">
-              <Loader2 className="mr-2 h-6 w-6 animate-spin text-teal-600" />
+            <div className="py-20 flex justify-center items-center" style={{ color: '#94a3b8' }}>
+              <Loader2 className="mr-2 h-6 w-6 animate-spin text-teal-500" />
               Loading configuration...
             </div>
           ) : configs.length === 0 ? (
-            <div className="py-16 text-center text-gray-400">
-              <Hospital className="h-12 w-12 mx-auto mb-2 text-gray-300" />
-              <p className="text-sm font-semibold">No dates are currently blocked</p>
-              <p className="text-xs text-gray-500 mt-1">Patients can book slots for any working day.</p>
+            <div className="py-16 text-center" style={{ color: '#64748b' }}>
+              <Hospital className="h-12 w-12 mx-auto mb-2 text-slate-700" />
+              <p className="text-sm font-semibold" style={{ color: '#ffffff' }}>No dates are currently blocked</p>
+              <p className="text-xs mt-1" style={{ color: '#94a3b8' }}>Patients can book slots for any working day.</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b bg-gray-50 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                    <th className="p-3">Date</th>
+                  <tr className="border-b border-slate-800 bg-slate-800/30 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                    <th className="p-3 rounded-tl-xl">Date</th>
                     <th className="p-3">Clinic Location</th>
                     <th className="p-3">Reason</th>
-                    <th className="p-3 text-right">Actions</th>
+                    <th className="p-3 text-right rounded-tr-xl">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {configs.map((cfg) => (
-                    <tr key={cfg._id} className="border-b hover:bg-gray-50/50 transition-colors">
-                      <td className="p-3 font-semibold text-gray-900">
+                    <tr key={cfg._id} className="border-b border-slate-800 hover:bg-slate-800/50 transition-colors">
+                      <td className="p-3 font-bold" style={{ color: '#ffffff' }}>
                         {new Date(cfg.date).toLocaleDateString(undefined, {
                           weekday: 'short',
                           month: 'short',
@@ -209,11 +212,11 @@ export default function AdminAvailabilityPage() {
                           year: 'numeric',
                         })}
                       </td>
-                      <td className="p-3 text-gray-600 font-medium">
+                      <td className="p-3 font-medium" style={{ color: '#cbd5e1' }}>
                         {cfg.location.split(',')[0]}
                       </td>
                       <td className="p-3">
-                        <span className="inline-block text-xs font-medium text-amber-700 bg-amber-50 px-2 py-1 rounded border border-amber-100">
+                        <span className="inline-block text-xs font-bold text-amber-200 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/30">
                           {cfg.blockedReason || 'Closed'}
                         </span>
                       </td>
@@ -222,7 +225,7 @@ export default function AdminAvailabilityPage() {
                           variant="ghost"
                           size="sm"
                           onClick={() => handleUnblockDate(cfg._id)}
-                          className="text-rose-600 hover:text-rose-700 hover:bg-rose-50 cursor-pointer"
+                          className="text-rose-400 hover:text-rose-300 hover:bg-rose-950/60 cursor-pointer rounded-xl transition-colors"
                         >
                           <Trash2 className="h-4 w-4" />
                           <span className="sr-only">Unblock</span>

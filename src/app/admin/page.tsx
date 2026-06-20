@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic';
 
 export default function AdminDashboardPage() {
   return (
-    <div className="space-y-8">
+    <div style={{ display: 'flex', flexDirection: 'column', padding: '2.5rem', gap: '3rem' }}>
       {/* ── Stat Cards Section ───────────────────────────────────── */}
       <section>
         <Suspense fallback={
@@ -21,8 +21,8 @@ export default function AdminDashboardPage() {
       </section>
 
       {/* ── Appointments Table Section ───────────────────────────── */}
-      <section className="bg-[#0f172a] rounded-3xl shadow-2xl shadow-black/40 border border-slate-800/80 overflow-hidden">
-        <div className="p-6 md:p-8 border-b border-slate-800/80 bg-[#0f172a] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <section className="bg-[#0f172a] rounded-3xl shadow-2xl shadow-black/40 border border-slate-800/80 overflow-hidden" style={{ marginTop: '3rem' }}>
+        <div className="border-b border-slate-800/80 bg-[#0f172a] flex flex-col sm:flex-row sm:items-center justify-between gap-4" style={{ padding: '2rem 2.5rem' }}>
           <div>
             <h2 className="text-2xl font-black font-sans tracking-tight" style={{ color: '#ffffff' }}>Appointments List</h2>
             <p className="text-sm mt-1.5 font-medium" style={{ color: '#94a3b8' }}>Manage and update patient appointments.</p>
@@ -32,7 +32,7 @@ export default function AdminDashboardPage() {
             Live Updates
           </div>
         </div>
-        <div className="p-4 md:p-8 bg-[#020817]">
+        <div className="bg-[#020817]" style={{ padding: '2.5rem 2.5rem 4rem 2.5rem' }}>
           <AppointmentsTable />
         </div>
       </section>

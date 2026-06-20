@@ -172,7 +172,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* ── Main Content ────────────────────────────────────── */}
       <main className="flex-1 flex flex-col min-h-screen overflow-x-hidden">
         {/* Top bar */}
-        <div className="hidden md:flex items-center justify-between px-8 py-5 bg-[#0f172a]/80 backdrop-blur-md border-b border-slate-800/60 sticky top-0 z-30">
+        <div className="hidden md:flex items-center justify-between bg-[#0f172a]/80 backdrop-blur-md border-b border-slate-800/60 sticky top-0 z-30" style={{ padding: '2rem 2rem 1.25rem 2rem' }}>
           <div>
             <h1 className="font-black text-2xl tracking-tight leading-tight" style={{ color: '#ffffff' }}>
               {navItems.find(n => n.href === pathname)?.name || 'Admin Panel'}
