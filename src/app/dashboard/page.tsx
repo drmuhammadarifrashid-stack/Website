@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 interface Appointment {
-  _id: string;
+  id: string;
   name: string;
   phone: string;
   age: number;
@@ -63,7 +63,7 @@ export default function DashboardPage() {
   }, [status, router, fetchAppointments, session]);
 
   const handleCancel = async (id: string) => {
-    const appointment = appointments.find((a) => a._id === id);
+    const appointment = appointments.find((a) => a.id === id);
     if (!appointment) return;
 
     // Enforce 24h cancellation window in UI (optional warning but we enforce it here)
@@ -236,7 +236,7 @@ export default function DashboardPage() {
                     const canReschedule = appt.status === 'pending' || appt.status === 'confirmed';
 
                     return (
-                      <tr key={appt._id} style={styles.tr}>
+                      <tr key={appt.id} style={styles.tr}>
                         <td style={styles.td}>
                           <div style={{ fontWeight: 600, color: 'white' }}>
                             {formatDate(appt.appointmentDate)}
@@ -265,7 +265,7 @@ export default function DashboardPage() {
                           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                             {canReschedule && (
                               <button
-                                onClick={() => openRescheduleModal(appt._id)}
+                                onClick={() => openRescheduleModal(appt.id)}
                                 style={styles.rescheduleActionBtn}
                               >
                                 Reschedule
@@ -273,7 +273,7 @@ export default function DashboardPage() {
                             )}
                             {canCancel && (
                               <button
-                                onClick={() => handleCancel(appt._id)}
+                                onClick={() => handleCancel(appt.id)}
                                 style={styles.cancelActionBtn}
                               >
                                 Cancel
