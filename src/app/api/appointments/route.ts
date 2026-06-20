@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ZodError } from 'zod';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/lib/auth';
 import { appointmentSchema } from '@/lib/appointmentSchema';
 import { createAppointment, getAppointments } from '@/lib/appointmentService';
 import type { AppointmentFilters, PaginationOptions } from '@/types/appointment';
+import { sendBookingConfirmation, sendDoctorNewBookingAlert } from '@/lib/email';
 
 // ============================================================
 // GET /api/appointments
@@ -12,6 +15,12 @@ import type { AppointmentFilters, PaginationOptions } from '@/types/appointment'
 
 export async function GET(request: NextRequest) {
   try {
+    // Enforce admin-only access for listing all appointments
+    const session = await getServerSession(authOptions);
+    if (!session || session.user?.role !== 'admin') {
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { searchParams } = request.nextUrl;
 
     const filters: AppointmentFilters = {
@@ -80,11 +89,39 @@ export async function POST(request: NextRequest) {
 
   // ── 3. Save to MongoDB ────────────────────────────────────
   try {
-    const appointment = await createAppointment(parsed.data);
+    // Attach session user info if logged in
+    const session = await getServerSession(authOptions);
+    const appointmentData = {
+      ...parsed.data,
+      ...(session?.user && {
+        userId: session.user.id,
+        email: session.user.email ?? undefined,
+      }),
+    };
+
+    const appointment = await createAppointment(appointmentData);
+    const obj = appointment.toObject();
+
+    // ── Fire emails (non-blocking) ──────────────────────────
+    if (obj.email) {
+      const emailData = {
+        patientName: obj.name,
+        patientEmail: obj.email as string,
+        patientPhone: obj.phone,
+        appointmentDate: obj.appointmentDate,
+        appointmentTime: obj.appointmentTime,
+        location: obj.location,
+        reason: obj.reason,
+        appointmentId: (obj.id ?? obj._id ?? '').toString(),
+      };
+      sendBookingConfirmation(emailData).catch(console.error);
+      sendDoctorNewBookingAlert(emailData).catch(console.error);
+    }
+
     return NextResponse.json(
       {
         success: true,
-        data: appointment.toObject(),
+        data: obj,
         message: 'Appointment booked successfully. We will confirm within 24 hours.',
       },
       { status: 201 }

@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/lib/auth';
 import {
   getAppointmentById,
   updateAppointment,
@@ -6,6 +8,11 @@ import {
   updateAppointmentStatus,
 } from '@/lib/appointmentService';
 import type { UpdateAppointmentInput, AppointmentStatus } from '@/types/appointment';
+import {
+  sendAppointmentConfirmed,
+  sendAppointmentCancelled,
+  sendRescheduleNotice,
+} from '@/lib/email';
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -15,6 +22,11 @@ type Params = { params: Promise<{ id: string }> };
 
 export async function GET(_request: NextRequest, { params }: Params) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session || session.user?.role !== 'admin') {
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { id } = await params;
     const appointment = await getAppointmentById(id);
 
@@ -45,6 +57,11 @@ export async function GET(_request: NextRequest, { params }: Params) {
 
 export async function PATCH(request: NextRequest, { params }: Params) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session || session.user?.role !== 'admin') {
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { id } = await params;
     const body: UpdateAppointmentInput & { status?: AppointmentStatus } =
       await request.json();
@@ -58,12 +75,35 @@ export async function PATCH(request: NextRequest, { params }: Params) {
           { status: 404 }
         );
       }
+
+      // ── Trigger email notifications based on new status ──────
+      if (updated.email) {
+        const emailData = {
+          patientName: updated.name,
+          patientEmail: updated.email,
+          patientPhone: updated.phone,
+          appointmentDate: updated.appointmentDate,
+          appointmentTime: updated.appointmentTime,
+          location: updated.location,
+          reason: updated.reason,
+          appointmentId: id,
+          adminNote: updated.adminNote,
+        };
+
+        if (body.status === 'confirmed') {
+          sendAppointmentConfirmed(emailData).catch(console.error);
+        } else if (body.status === 'cancelled') {
+          sendAppointmentCancelled(emailData).catch(console.error);
+        }
+      }
+
       return NextResponse.json(
         { success: true, data: updated.toObject() },
         { status: 200 }
       );
     }
 
+    // Full update (e.g. reschedule by admin)
     const updated = await updateAppointment(id, body);
 
     if (!updated) {
@@ -71,6 +111,23 @@ export async function PATCH(request: NextRequest, { params }: Params) {
         { success: false, error: 'Appointment not found' },
         { status: 404 }
       );
+    }
+
+    // If date/time changed AND patient has email → send reschedule email
+    const wasRescheduled =
+      (body.appointmentDate || body.appointmentTime) && updated.email;
+    if (wasRescheduled && updated.email) {
+      sendRescheduleNotice({
+        patientName: updated.name,
+        patientEmail: updated.email,
+        patientPhone: updated.phone,
+        appointmentDate: updated.appointmentDate,
+        appointmentTime: updated.appointmentTime,
+        location: updated.location,
+        reason: updated.reason,
+        appointmentId: id,
+        adminNote: updated.adminNote,
+      }).catch(console.error);
     }
 
     return NextResponse.json(
@@ -113,6 +170,11 @@ export async function PATCH(request: NextRequest, { params }: Params) {
 
 export async function DELETE(_request: NextRequest, { params }: Params) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session || session.user?.role !== 'admin') {
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { id } = await params;
     const deleted = await deleteAppointment(id);
 

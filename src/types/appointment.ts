@@ -6,7 +6,7 @@
 export type Gender = 'Male' | 'Female' | 'Other' | 'Prefer not to say';
 
 /** Appointment lifecycle status */
-export type AppointmentStatus = 'pending' | 'confirmed' | 'completed' | 'cancelled';
+export type AppointmentStatus = 'pending' | 'confirmed' | 'completed' | 'cancelled' | 'rescheduled_requested';
 
 /** Available clinic / hospital locations */
 export type AppointmentLocation =
@@ -21,6 +21,9 @@ export type AppointmentLocation =
 /** Raw appointment as stored in MongoDB */
 export interface IAppointmentDocument {
   _id: string;
+  // Patient link (set when logged-in user books)
+  userId?: string;
+  email?: string;            // patient email for notifications
   name: string;
   phone: string;
   age: number;
@@ -30,6 +33,8 @@ export interface IAppointmentDocument {
   location: AppointmentLocation;
   reason: string;
   status: AppointmentStatus;
+  rescheduleNote?: string;   // patient's note when requesting reschedule
+  adminNote?: string;        // admin note when rescheduling
   createdAt: Date;
   updatedAt: Date;
 }

@@ -2,7 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 import { getAppointmentRequestMessage } from '@/lib/whatsapp';
@@ -262,11 +262,20 @@ export function AppointmentForm() {
   const [serverError, setServerError] = useState('');
   const [successData, setSuccessData] = useState<SuccessData | null>(null);
 
+  // Availability & slots states
+  const [blockedDates, setBlockedDates] = useState<string[]>([]);
+  const [fullyBookedDates, setFullyBookedDates] = useState<string[]>([]);
+  const [availableSlots, setAvailableSlots] = useState<string[]>([]);
+  const [loadingSlots, setLoadingSlots] = useState(false);
+  const [dateError, setDateError] = useState('');
+
   const {
     register,
     handleSubmit,
     trigger,
     getValues,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm<AppointmentFormValues>({
     resolver: zodResolver(appointmentSchema),
@@ -282,6 +291,91 @@ export function AppointmentForm() {
       reason: '',
     },
   });
+
+  const selectedLocation = watch('location');
+  const selectedDate = watch('appointmentDate');
+
+  // Fetch blocked and fully booked dates when location changes
+  useEffect(() => {
+    if (!selectedLocation) {
+      setBlockedDates([]);
+      setFullyBookedDates([]);
+      return;
+    }
+
+    const fetchBlockedDates = async () => {
+      try {
+        const res = await fetch(`/api/appointments/availability?location=${encodeURIComponent(selectedLocation)}`);
+        const json = await res.json();
+        if (json.success) {
+          setBlockedDates(json.blockedDates || []);
+          setFullyBookedDates(json.fullyBookedDates || []);
+        }
+      } catch (err) {
+        console.error('Failed to fetch blocked dates', err);
+      }
+    };
+
+    fetchBlockedDates();
+    // Reset date and time values upon location change
+    setValue('appointmentDate', '');
+    setValue('appointmentTime', undefined as any);
+    setAvailableSlots([]);
+    setDateError('');
+  }, [selectedLocation, setValue]);
+
+  // Fetch available slots when date changes, validating selected date against blocked lists
+  useEffect(() => {
+    if (!selectedLocation || !selectedDate) {
+      setAvailableSlots([]);
+      setDateError('');
+      return;
+    }
+
+    if (blockedDates.includes(selectedDate)) {
+      setDateError('The doctor is not available on this date. Please choose another date.');
+      setValue('appointmentDate', '');
+      setValue('appointmentTime', undefined as any);
+      setAvailableSlots([]);
+      return;
+    }
+
+    if (fullyBookedDates.includes(selectedDate)) {
+      setDateError('This date is fully booked. Please select another date.');
+      setValue('appointmentDate', '');
+      setValue('appointmentTime', undefined as any);
+      setAvailableSlots([]);
+      return;
+    }
+
+    setDateError('');
+
+    const fetchSlots = async () => {
+      try {
+        setLoadingSlots(true);
+        const res = await fetch(
+          `/api/appointments/availability?location=${encodeURIComponent(
+            selectedLocation
+          )}&date=${selectedDate}`
+        );
+        const json = await res.json();
+        if (json.success && json.available) {
+          setAvailableSlots(json.slots || []);
+        } else if (json.success && !json.available) {
+          setDateError(json.message || 'No slots available for this date.');
+          setValue('appointmentDate', '');
+          setValue('appointmentTime', undefined as any);
+          setAvailableSlots([]);
+        }
+      } catch (err) {
+        console.error('Failed to fetch available slots', err);
+      } finally {
+        setLoadingSlots(false);
+      }
+    };
+
+    fetchSlots();
+  }, [selectedDate, selectedLocation, blockedDates, fullyBookedDates, setValue]);
 
   // ── Step field mapping ─────────────────────────────────────
   const STEP_FIELDS: Record<Step, (keyof AppointmentFormValues)[]> = {
@@ -520,10 +614,10 @@ export function AppointmentForm() {
                     id="appointmentDate"
                     type="date"
                     min={today}
-                    style={inputStyle(!!errors.appointmentDate)}
+                    style={inputStyle(!!errors.appointmentDate || !!dateError)}
                     {...register('appointmentDate')}
                   />
-                  <FieldError message={errors.appointmentDate?.message} />
+                  <FieldError message={errors.appointmentDate?.message || dateError} />
                 </div>
                 <div>
                   <Label required>Preferred Time</Label>
@@ -531,11 +625,20 @@ export function AppointmentForm() {
                     id="appointmentTime"
                     style={inputStyle(!!errors.appointmentTime)}
                     {...register('appointmentTime')}
+                    disabled={loadingSlots || !selectedDate}
                   >
-                    <option value="">Select time...</option>
-                    {TIME_SLOTS.map((t) => (
+                    <option value="">
+                      {loadingSlots
+                        ? 'Loading slots...'
+                        : !selectedDate
+                        ? 'Select date first...'
+                        : availableSlots.length === 0
+                        ? 'No slots available'
+                        : 'Select time...'}
+                    </option>
+                    {availableSlots.map((t) => (
                       <option key={t} value={t}>
-                        {TIME_SLOT_LABELS[t]}
+                        {TIME_SLOT_LABELS[t] ?? t}
                       </option>
                     ))}
                   </select>

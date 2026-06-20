@@ -4,6 +4,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
+import Providers from './providers';
 import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
@@ -48,10 +49,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={cn(inter.className, outfit.variable, "font-sans", geist.variable)}>
       <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <WhatsAppFloat />
+        <Providers>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+          <WhatsAppFloat />
+        </Providers>
       </body>
     </html>
   );

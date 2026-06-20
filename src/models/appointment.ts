@@ -10,6 +10,10 @@ import type {
 // ============================================================
 
 export interface IAppointment extends Document {
+  // Patient link
+  userId?: string;
+  email?: string;
+  // Patient info
   name: string;
   phone: string;
   age: number;
@@ -19,6 +23,8 @@ export interface IAppointment extends Document {
   location: AppointmentLocation;
   reason: string;
   status: AppointmentStatus;
+  rescheduleNote?: string;
+  adminNote?: string;
   createdAt: Date;
   updatedAt: Date;
 
@@ -66,6 +72,18 @@ function isFutureDate(dateStr: string): boolean {
 
 const AppointmentSchema = new Schema<IAppointment, IAppointmentModel>(
   {
+    // ── Patient Link ─────────────────────────────────────────
+    userId: {
+      type: String,
+      index: true,
+    },
+
+    email: {
+      type: String,
+      trim: true,
+      lowercase: true,
+    },
+
     // ── Patient Information ──────────────────────────────────
     name: {
       type: String,
@@ -168,10 +186,24 @@ const AppointmentSchema = new Schema<IAppointment, IAppointmentModel>(
           'confirmed',
           'completed',
           'cancelled',
+          'rescheduled_requested',
         ] as AppointmentStatus[],
         message: '{VALUE} is not a valid appointment status',
       },
       default: 'pending',
+    },
+
+    // ── Admin / Reschedule Notes ─────────────────────────────
+    rescheduleNote: {
+      type: String,
+      trim: true,
+      maxlength: [500, 'Reschedule note cannot exceed 500 characters'],
+    },
+
+    adminNote: {
+      type: String,
+      trim: true,
+      maxlength: [500, 'Admin note cannot exceed 500 characters'],
     },
   },
   {
