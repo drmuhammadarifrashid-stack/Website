@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Search, Loader2, Calendar, Trash2, MessageCircle, RefreshCw, ChevronLeft, ChevronRight, Check, X, Clock } from 'lucide-react';
 
 interface Appointment {
-  _id: string;
+  id: string;
   name: string;
   phone: string;
   age: number;
@@ -113,7 +113,7 @@ function RescheduleModal({
     e.preventDefault();
     setSubmitting(true);
     try {
-      const res = await fetch(`/api/appointments/${apt._id}`, {
+      const res = await fetch(`/api/appointments/${apt.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -210,7 +210,7 @@ function ActionsMenu({
     setLoading(newStatus);
     setOpen(false);
     try {
-      const res = await fetch(`/api/appointments/${apt._id}`, {
+      const res = await fetch(`/api/appointments/${apt.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus }),
@@ -230,7 +230,7 @@ function ActionsMenu({
     if (!confirm(`Delete appointment for ${apt.name}? This cannot be undone.`)) return;
     setOpen(false);
     try {
-      await fetch(`/api/appointments/${apt._id}`, { method: 'DELETE' });
+      await fetch(`/api/appointments/${apt.id}`, { method: 'DELETE' });
       onRefresh();
     } catch {
       alert('Failed to delete.');
@@ -428,7 +428,7 @@ export default function AppointmentsTable() {
                   {appointments.map(apt => {
                     const cfg = STATUS_CONFIG[apt.status] || STATUS_CONFIG.pending;
                     return (
-                      <tr key={apt._id} className="hover:bg-slate-50/70 transition-colors group">
+                      <tr key={apt.id} className="hover:bg-slate-50/70 transition-colors group">
                         {/* Patient */}
                         <td className="px-5 py-4">
                           <div className="flex items-center gap-3">
