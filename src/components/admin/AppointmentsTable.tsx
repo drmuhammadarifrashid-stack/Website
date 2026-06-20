@@ -264,8 +264,8 @@ export default function AppointmentsTable() {
 
       <div className="space-y-8">
         {/* Sleek Filters & Search Area */}
-        <div className="bg-[#0f172a] p-6 rounded-3xl border border-slate-800 shadow-xl space-y-6">
-          <div className="flex flex-col md:flex-row gap-5 items-center justify-between">
+        <div className="bg-[#0f172a] p-6 rounded-3xl border border-slate-800 shadow-xl" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '1.5rem' }}>
+          <div className="flex flex-col md:flex-row items-center justify-between" style={{ gap: '1.25rem' }}>
             {/* Search Input */}
             <div className="relative w-full md:max-w-lg group">
               <div 

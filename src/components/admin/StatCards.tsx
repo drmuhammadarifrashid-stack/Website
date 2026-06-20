@@ -65,7 +65,7 @@ export default async function StatCards() {
           <div 
             key={card.title} 
             className={`relative bg-[#0f172a] rounded-3xl border ${card.borderColor} shadow-xl ${card.glow} overflow-hidden group hover:border-opacity-100 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between`}
-            style={{ minHeight: '180px', padding: '1.5rem', paddingBottom: '2rem' }}
+            style={{ minHeight: '130px', padding: '1.25rem', paddingBottom: '1.25rem' }}
           >
             {/* Background Gradient */}
             <div className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-60 group-hover:opacity-100 transition-opacity duration-300`} />
@@ -81,9 +81,9 @@ export default async function StatCards() {
               )}
             </div>
             
-            <div className="relative z-10 mt-6 flex flex-col gap-1 pb-2">
+            <div className="relative z-10 mt-4 flex flex-col gap-1 pb-1">
               {/* Using inline style for color to completely override globals.css h3 styles */}
-              <h3 className="text-4xl font-black tracking-tight font-sans leading-none" style={{ color: '#ffffff' }}>
+              <h3 className="font-black tracking-tight font-sans leading-none" style={{ fontSize: '2.5rem', color: '#ffffff' }}>
                 {card.value}
               </h3>
               <div className="mt-1">

@@ -56,8 +56,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const SidebarContent = () => (
     <div className="flex flex-col h-full">
-      {/* Brand */}
-      <div className="px-6 py-6 border-b border-slate-800/60">
+      {/* Header */}
+      <div className="border-b border-slate-800/60 bg-[#0f172a]/95 sticky top-0 z-20" style={{ padding: '2rem 1.5rem 1.25rem 1.5rem' }}>
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center shadow-lg shadow-teal-900/40 flex-shrink-0">
             <Stethoscope className="h-5 w-5 text-white" />
