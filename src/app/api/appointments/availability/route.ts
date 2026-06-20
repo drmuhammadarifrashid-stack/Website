@@ -47,14 +47,14 @@ export async function GET(request: NextRequest) {
         });
       }
 
-      // 2. Check if date is fully booked (10+ appointments limit)
+      // 2. Check if date is fully booked (6+ appointments limit)
       const activeCount = await Appointment.countDocuments({
         location,
         appointmentDate: date,
         status: { $in: ['pending', 'confirmed'] },
       } as Record<string, unknown>).exec();
 
-      if (activeCount >= 10) {
+      if (activeCount >= 6) {
         return NextResponse.json({
           success: true,
           available: false,
@@ -83,6 +83,13 @@ export async function GET(request: NextRequest) {
       } as Record<string, unknown>).exec();
 
       let availableSlots = TIME_SLOTS.filter((slot) => !bookedSlots.includes(slot));
+
+      // Filter based on location specific hours
+      if (location === 'Fauji Foundation Hospital') {
+        availableSlots = availableSlots.filter(slot => slot >= '09:00' && slot <= '13:00');
+      } else if (location === 'Muhammad Ali Khan Orthopedic & Surgical Hospital') {
+        availableSlots = availableSlots.filter(slot => slot >= '18:00' && slot <= '20:00');
+      }
 
       if (customHoursConfig && customHoursConfig.workingHours) {
         const { start, end } = customHoursConfig.workingHours;
@@ -126,7 +133,7 @@ export async function GET(request: NextRequest) {
       },
       {
         $match: {
-          count: { $gte: 10 },
+          count: { $gte: 6 },
         },
       },
     ]);

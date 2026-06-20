@@ -15,7 +15,7 @@ const quickLinks = [
 const services = [
   'Chronic Pain Management',
   'Interventional Pain Procedures',
-  'Perioperative Optimization',
+  'Interventional Pain Physician',
   'Postoperative Pain Management',
   'Back & Spine Pain',
   'Cancer Pain Management',
@@ -117,7 +117,7 @@ export default function Footer() {
                 { icon: '📍', label: 'Location', value: 'Lahore, Pakistan' },
                 { icon: '📞', label: 'Phone', value: '+92 304 455 0048' },
                 { icon: '📧', label: 'Email', value: 'drmuhammadarifrashid@gmail.com' },
-                { icon: '⏰', label: 'Hours', value: 'Mon–Sat: 9AM – 6PM' },
+                { icon: '⏰', label: 'Hours', value: 'Mon–Sat: 9AM – 8PM' },
               ].map((item) => (
                 <div key={item.label} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
                   <span style={{ fontSize: '1rem', flexShrink: 0, marginTop: 2 }}>{item.icon}</span>

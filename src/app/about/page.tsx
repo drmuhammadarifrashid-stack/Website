@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 };
 
 const qualifications = [
-  { degree: 'Fellowship – Pain Medicine', institution: 'International Pain Institute', year: '2011' },
-  { degree: 'FCPS – Anaesthesiology', institution: 'College of Physicians & Surgeons Pakistan', year: '2009' },
-  { degree: 'DA (Diploma Anaesthesia)', institution: 'College of Physicians & Surgeons Pakistan', year: '2006' },
-  { degree: 'MBBS', institution: 'King Edward Medical University', year: '2003' },
+  { degree: 'Fellowship – Pain Medicine', institution: 'International Pain Institute' },
+  { degree: 'FCPS – Anaesthesiology', institution: 'College of Physicians & Surgeons Pakistan' },
+  { degree: 'DA (Diploma Anaesthesia)', institution: 'College of Physicians & Surgeons Pakistan' },
+  { degree: 'MBBS', institution: 'King Edward Medical University' },
 ];
 
 const expertise = [
@@ -36,7 +36,7 @@ const memberships = [
   'Pakistan Pain Society (PPS)',
   'World Institute of Pain (WIP)',
   'International Association for the Study of Pain (IASP)',
-  'American Society of Regional Anesthesia (ASRA)',
+  'Master in Interventional Pain Medicine',
 ];
 
 export default function AboutPage() {
@@ -168,8 +168,8 @@ export default function AboutPage() {
               <div>
                 {qualifications.map((q, i) => (
                   <div key={i} style={{ display: 'flex', gap: '1.25rem', alignItems: 'flex-start', padding: '1.25rem', background: i % 2 === 0 ? 'var(--color-off-white)' : 'white', borderRadius: 12, marginBottom: '0.75rem', border: '1px solid var(--color-gray-100)' }}>
-                    <div style={{ width: 48, height: 48, borderRadius: 12, flexShrink: 0, background: 'linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-light) 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: '0.85rem', fontFamily: 'Outfit, sans-serif' }}>
-                      {q.year}
+                    <div style={{ width: 48, height: 48, borderRadius: 12, flexShrink: 0, background: 'linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-light) 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: '1.5rem', fontFamily: 'Outfit, sans-serif' }}>
+                      🎓
                     </div>
                     <div>
                       <div style={{ fontWeight: 700, color: 'var(--color-navy)', fontSize: '1rem' }}>{q.degree}</div>

@@ -58,7 +58,7 @@ const serviceCategories = [
   {
     id: 'perioperative',
     icon: '🏥',
-    title: 'Perioperative Optimization',
+    title: 'Interventional Pain Physician',
     subtitle: 'Preparing patients for safer, smoother surgical outcomes',
     description: 'Proper pre-surgical pain management and anesthetic planning is critical for patient safety and recovery. Dr. Arif provides comprehensive perioperative services to reduce surgical risk, optimize chronic health conditions, and ensure the best possible surgical outcomes.',
     benefits: [

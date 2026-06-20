@@ -33,7 +33,7 @@ const services = [
   },
   {
     icon: '🏥',
-    title: 'Perioperative Optimization',
+    title: 'Interventional Pain Physician',
     description: 'Pre-surgical assessment, risk stratification, and personalized preparation plans to ensure safer surgical outcomes.',
     color: '#f0fdf4',
     accent: '#059669',
@@ -57,8 +57,8 @@ const reasons = [
 ];
 
 const locations = [
-  { name: 'Makosh Pain Clinic', address: 'Wapda Town, Lahore', hours: 'Mon-Fri: 5:00 PM - 9:00 PM', icon: '🏥' },
-  { name: 'Farooq Hospital', address: 'DHA Phase 5, Lahore', hours: 'Tue & Thu: 3:00 PM - 6:00 PM', icon: '🏢' },
+  { name: 'Muhammad Ali Khan Orthopedic & Surgical Hospital', address: 'Ferozpur Rd, Qainchi Amar Sidhu, Lahore, Pakistan', hours: 'Mon-Sat: 6:00 PM - 8:00 PM', icon: '🏥' },
+  { name: 'Fauji Foundation Hospital', address: 'Bedian Rd, near Askari 3, Cantt, Lahore', hours: 'Mon-Sat: 9:00 AM - 1:00 PM', icon: '🏢' },
 ];
 
 const testimonials = [
