@@ -10,9 +10,9 @@ export default function AdminDashboardPage() {
       {/* ── Stat Cards Section ───────────────────────────────────── */}
       <section>
         <Suspense fallback={
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
             {[...Array(5)].map((_, i) => (
-              <div key={i} className="h-32 bg-[#0f172a] rounded-2xl animate-pulse border border-slate-800/60" />
+              <div key={i} className="h-40 bg-[#0f172a] rounded-3xl animate-pulse border border-slate-800/60" />
             ))}
           </div>
         }>
@@ -21,18 +21,18 @@ export default function AdminDashboardPage() {
       </section>
 
       {/* ── Appointments Table Section ───────────────────────────── */}
-      <section className="bg-[#0f172a] rounded-2xl shadow-xl shadow-black/20 border border-slate-800/60 overflow-hidden">
-        <div className="p-6 border-b border-slate-800/60 bg-[#0f172a] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <section className="bg-[#0f172a] rounded-3xl shadow-2xl shadow-black/40 border border-slate-800/80 overflow-hidden">
+        <div className="p-6 md:p-8 border-b border-slate-800/80 bg-[#0f172a] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h2 className="text-xl font-bold text-white font-sans tracking-tight">Appointments List</h2>
-            <p className="text-sm text-slate-400 mt-1">Manage and update patient appointments.</p>
+            <h2 className="text-2xl font-black font-sans tracking-tight" style={{ color: '#ffffff' }}>Appointments List</h2>
+            <p className="text-sm mt-1.5 font-medium" style={{ color: '#94a3b8' }}>Manage and update patient appointments.</p>
           </div>
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-xs font-semibold">
-            <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span>
+          <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-400 text-xs font-bold shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse shadow-[0_0_8px_rgba(45,212,191,0.8)]"></span>
             Live Updates
           </div>
         </div>
-        <div className="p-4 sm:p-6 bg-[#020817]">
+        <div className="p-4 md:p-8 bg-[#020817]">
           <AppointmentsTable />
         </div>
       </section>
