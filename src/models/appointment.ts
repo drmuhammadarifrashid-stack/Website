@@ -61,9 +61,10 @@ function isValidDate(dateStr: string): boolean {
 }
 
 function isFutureDate(dateStr: string): boolean {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  return new Date(dateStr) >= today;
+  // Compare as date strings (YYYY-MM-DD) to avoid timezone issues
+  // Vercel runs in UTC, Pakistan is UTC+5 — using string comparison is timezone-safe
+  const todayStr = new Date().toISOString().split('T')[0];
+  return dateStr >= todayStr;
 }
 
 // ============================================================

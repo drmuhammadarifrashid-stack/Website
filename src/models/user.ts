@@ -83,7 +83,6 @@ const UserSchema = new Schema<IUser, IUserModel>(
 // Indexes
 // ============================================================
 
-UserSchema.index({ email: 1 }, { unique: true });
 UserSchema.index({ role: 1 });
 
 // ============================================================
