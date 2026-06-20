@@ -7,18 +7,40 @@ export const dynamic = 'force-dynamic';
 export default function AdminDashboardPage() {
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
-        <p className="text-gray-500">Overview of clinic appointments and patient requests.</p>
+      {/* Page Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-black text-slate-900 tracking-tight">Dashboard</h1>
+          <p className="text-sm text-slate-400 mt-0.5">Manage appointments and track clinic activity</p>
+        </div>
       </div>
 
-      <Suspense fallback={<div className="h-32 bg-gray-100 animate-pulse rounded-xl" />}>
+      {/* Stat Cards */}
+      <Suspense
+        fallback={
+          <div className="grid gap-4 grid-cols-2 lg:grid-cols-5 mb-6">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <div key={i} className="h-28 rounded-2xl bg-slate-100 animate-pulse" />
+            ))}
+          </div>
+        }
+      >
         <StatCards />
       </Suspense>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-        <div className="p-6 border-b border-gray-100">
-          <h2 className="text-xl font-semibold text-gray-800">Appointments List</h2>
+      {/* Appointments */}
+      <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+        <div className="px-6 py-5 border-b border-slate-50 flex items-center justify-between">
+          <div>
+            <h2 className="text-base font-bold text-slate-800">Appointments List</h2>
+            <p className="text-xs text-slate-400 mt-0.5">
+              Click <span className="font-semibold text-teal-600">⋯</span> on any row to change status, reschedule, or send WhatsApp
+            </p>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+            <span className="text-xs text-slate-400 font-medium">Live</span>
+          </div>
         </div>
         <div className="p-6">
           <AppointmentsTable />

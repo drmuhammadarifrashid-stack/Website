@@ -1,14 +1,11 @@
 import type { Metadata } from 'next';
 import { Inter, Outfit, Geist } from 'next/font/google';
 import './globals.css';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import WhatsAppFloat from '@/components/WhatsAppFloat';
 import Providers from './providers';
+import ClientLayout from '@/components/ClientLayout';
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 const outfit = Outfit({ subsets: ['latin'], display: 'swap', variable: '--font-outfit' });
 
@@ -47,13 +44,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={cn(inter.className, outfit.variable, "font-sans", geist.variable)}>
+    <html lang="en" className={cn(inter.className, outfit.variable, 'font-sans', geist.variable)}>
       <body>
         <Providers>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-          <WhatsAppFloat />
+          <ClientLayout>{children}</ClientLayout>
         </Providers>
       </body>
     </html>
