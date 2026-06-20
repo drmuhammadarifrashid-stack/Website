@@ -75,7 +75,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </div>
 
       {/* Nav Links */}
-      <nav className="flex-1 px-4 space-y-2">
+      <nav className="flex-1 px-4 space-y-4">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           const Icon = item.icon;
@@ -110,8 +110,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </nav>
 
       {/* Footer */}
-      <div className="p-6 border-t border-slate-800/60 bg-slate-900/50 mb-4">
-        <div className="flex items-center gap-3 px-2 mb-4">
+      <div className="p-6 border-t border-slate-800/60 bg-slate-900/50 mb-8">
+        <div className="flex items-center gap-3 px-2 mb-6">
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-slate-700 to-slate-800 border border-slate-700 flex items-center justify-center text-xl flex-shrink-0">
             👨‍⚕️
           </div>
@@ -122,10 +122,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
         <button
           onClick={() => signOut({ callbackUrl: '/' })}
-          className="w-full flex items-center justify-center gap-2 px-4 py-3.5 rounded-2xl text-sm font-bold bg-slate-800/40 hover:bg-rose-950/40 border border-slate-700/40 hover:border-rose-900/40 transition-all duration-200 cursor-pointer group"
+          className="w-full flex items-center justify-center gap-3 px-4 py-5 rounded-2xl text-base font-black bg-slate-800/40 hover:bg-rose-950/40 border border-slate-700/40 hover:border-rose-900/40 transition-all duration-200 cursor-pointer group"
           style={{ color: '#94a3b8' }}
         >
-          <LogOut className="h-4 w-4 group-hover:rotate-12 transition-transform duration-200 group-hover:text-rose-400" />
+          <LogOut className="h-5 w-5 group-hover:rotate-12 transition-transform duration-200 group-hover:text-rose-400" />
           <span className="group-hover:text-rose-400 transition-colors">Sign Out</span>
         </button>
       </div>

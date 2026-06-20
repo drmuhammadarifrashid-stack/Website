@@ -363,7 +363,7 @@ export default function AppointmentsTable() {
                             <span className="text-sm font-semibold mt-1 block" style={{ color: '#94a3b8' }}>{apt.age}y • {apt.gender}</span>
                           </div>
                         </div>
-                        <span className={`text-xs font-black px-3.5 py-1.5 rounded-full border uppercase tracking-widest ${badgeStyle}`} style={{ color: badgeColor }}>
+                        <span className={`text-[11px] font-black px-3.5 py-1.5 rounded-full border uppercase tracking-wider leading-none flex items-center justify-center whitespace-nowrap h-7 ${badgeStyle}`} style={{ color: badgeColor }}>
                           {apt.status.replace('_', ' ')}
                         </span>
                       </div>
@@ -428,10 +428,10 @@ export default function AppointmentsTable() {
                         {/* Secondary Actions */}
                         <div className="flex w-full gap-3 mt-2">
                           <button onClick={() => openWhatsApp(apt, apt.status)} className="flex-1 py-3.5 border border-[#25D366]/40 bg-[#25D366]/10 hover:bg-[#25D366]/20 rounded-xl text-sm font-bold transition-all cursor-pointer flex items-center justify-center gap-2.5" style={{ color: '#25D366' }}>
-                             <MessageCircle className="h-5 w-5" /> Send WhatsApp
+                             <MessageCircle className="h-5 w-5 shrink-0" /> <span className="hidden sm:inline">Send WhatsApp</span><span className="sm:hidden">WhatsApp</span>
                           </button>
-                          <button onClick={() => handleDelete(apt)} className="px-5 py-3.5 border border-slate-700 bg-[#020817] hover:bg-rose-950/60 hover:border-rose-900/60 rounded-xl transition-all cursor-pointer flex items-center justify-center" style={{ color: '#64748b' }}>
-                             <Trash2 className="h-5 w-5 hover:text-rose-400 transition-colors" />
+                          <button onClick={() => handleDelete(apt)} className="shrink-0 px-5 py-3.5 border border-slate-700 bg-[#020817] hover:bg-rose-950/60 hover:border-rose-900/60 rounded-xl transition-all cursor-pointer flex items-center justify-center group" style={{ color: '#64748b' }}>
+                             <Trash2 className="h-5 w-5 group-hover:text-rose-400 transition-colors shrink-0" />
                           </button>
                         </div>
                       </div>
