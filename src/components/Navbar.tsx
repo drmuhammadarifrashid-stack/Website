@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useSession, signOut } from 'next-auth/react';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -18,6 +19,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -86,7 +88,21 @@ export default function Navbar() {
             </ul>
 
             {/* CTA Button */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }} className="desktop-nav">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }} className="desktop-nav">
+              {status === 'authenticated' ? (
+                <>
+                  <Link href={session?.user?.role === 'admin' ? '/admin' : '/dashboard'} style={{ color: 'var(--color-teal-light)', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
+                    Dashboard
+                  </Link>
+                  <button onClick={() => signOut({ callbackUrl: '/' })} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer', transition: 'color 0.2s ease' }} onMouseEnter={(e) => (e.currentTarget.style.color = '#f87171')} onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')}>
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <Link href="/login" style={{ color: 'white', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem', transition: 'color 0.2s ease' }} onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-teal-light)')} onMouseLeave={(e) => (e.currentTarget.style.color = 'white')}>
+                  Login
+                </Link>
+              )}
               <Link href="/appointment" className="btn btn-teal btn-sm">
                 Book Appointment
               </Link>
@@ -146,7 +162,21 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <div style={{ marginTop: '1rem' }}>
+          <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            {status === 'authenticated' ? (
+              <>
+                <Link href={session?.user?.role === 'admin' ? '/admin' : '/dashboard'} className="btn" style={{ width: '100%', background: 'rgba(26,122,138,0.2)', color: 'var(--color-teal-light)', textAlign: 'center', padding: '0.75rem' }}>
+                  Dashboard
+                </Link>
+                <button onClick={() => signOut({ callbackUrl: '/' })} className="btn" style={{ width: '100%', background: 'rgba(220,38,38,0.1)', color: '#f87171', textAlign: 'center', padding: '0.75rem', border: 'none' }}>
+                  Logout
+                </button>
+              </>
+            ) : (
+              <Link href="/login" className="btn" style={{ width: '100%', background: 'rgba(255,255,255,0.1)', color: 'white', textAlign: 'center', padding: '0.75rem' }}>
+                Login
+              </Link>
+            )}
             <Link href="/appointment" className="btn btn-teal" style={{ width: '100%' }}>
               📅 Book Appointment
             </Link>

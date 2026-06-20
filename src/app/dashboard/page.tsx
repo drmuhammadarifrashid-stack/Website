@@ -54,9 +54,13 @@ export default function DashboardPage() {
     if (status === 'unauthenticated') {
       router.push('/login');
     } else if (status === 'authenticated') {
-      fetchAppointments();
+      if (session?.user?.role === 'admin') {
+        router.push('/admin');
+      } else {
+        fetchAppointments();
+      }
     }
-  }, [status, router, fetchAppointments]);
+  }, [status, router, fetchAppointments, session]);
 
   const handleCancel = async (id: string) => {
     const appointment = appointments.find((a) => a._id === id);
@@ -395,7 +399,7 @@ const styles: Record<string, React.CSSProperties> = {
     background: 'linear-gradient(135deg, var(--color-navy-dark) 0%, var(--color-navy) 60%, var(--color-navy-light) 100%)',
     position: 'relative',
     overflow: 'hidden',
-    padding: '2.5rem 1.5rem',
+    padding: '6rem 1.5rem 2.5rem',
     fontFamily: 'Inter, sans-serif',
   },
   bgBlob1: {
